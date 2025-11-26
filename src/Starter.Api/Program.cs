@@ -14,11 +14,11 @@ app.MapGet("/", () =>
     return new InitResponse
     {
         ApiVersion = "1",
-        Author = "",
-        Color = "#FFFFFF",
-        Head = "default",
-        Tail = "default"
-    };
+        Author = "deadlydog-DanSchroeder",
+        Color = "#4C89C8",
+        Head = "do-sammy",
+        Tail = "nr-booster"
+	};
 });
 
 /// <summary>
