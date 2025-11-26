@@ -16,7 +16,7 @@ go install github.com/BattlesnakeOfficial/rules/cli/battlesnake@latest
 And then run the app in Visual Studio (or using `dotnet run`), and run the CLI against it using:
 
 ```cmd
-battlesnake play -W 11 -H 11 --name test_snake --url https://localhost:5001/ -g solo -v --delay 1000
+battlesnake play -W 11 -H 11 --name test_snake --url https://localhost:5001/ -g solo -v --delay 500
 ```
 
 ## Deployment
