@@ -1,4 +1,4 @@
-﻿namespace Starter.Api;
+namespace Battlesnake.WebApi.Model;
 
 /// <summary>
 /// The game board is represented by a standard 2D grid, oriented with (0,0) in the bottom left.

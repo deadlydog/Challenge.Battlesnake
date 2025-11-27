@@ -1,5 +1,5 @@
-using Starter.Api.Requests;
-using Starter.Api.Responses;
+using Battlesnake.WebApi.Requests;
+using Battlesnake.WebApi.Responses;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();

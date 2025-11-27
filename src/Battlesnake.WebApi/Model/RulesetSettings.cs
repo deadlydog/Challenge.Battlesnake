@@ -1,4 +1,4 @@
-namespace Starter.Api;
+namespace Battlesnake.WebApi.Model;
 
 public class RulesetSettings
 {

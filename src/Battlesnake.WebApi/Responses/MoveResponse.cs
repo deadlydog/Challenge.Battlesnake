@@ -1,4 +1,4 @@
-﻿namespace Starter.Api.Responses;
+namespace Battlesnake.WebApi.Responses;
 
 public class MoveResponse
 {
