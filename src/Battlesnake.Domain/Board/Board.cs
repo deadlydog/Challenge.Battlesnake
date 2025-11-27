@@ -8,6 +8,11 @@ public class Board
 
 	public Board(int width, int height)
 	{
+		if (width < 2 || height < 2)
+		{
+			throw new ArgumentException($"Board dimensions must be at least 2x2. Provided dimensions were {width} x {height}.");
+		}
+
 		Cells = new BoardCell[width, height];
 		for (int x = 0; x < width; x++)
 		{
