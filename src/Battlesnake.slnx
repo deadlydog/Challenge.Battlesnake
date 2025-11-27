@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Battlesnake.Domain/Battlesnake.Domain.csproj" />
+  <Project Path="Battlesnake.WebApi/Battlesnake.WebApi.csproj" />
+</Solution>
