@@ -1,6 +1,6 @@
-using Battlesnake.WebApi.Model;
+using Battlesnake.WebApi.BattlesnakeApi.Model;
 
-namespace Battlesnake.WebApi.Requests;
+namespace Battlesnake.WebApi.BattlesnakeApi.Requests;
 
 public class GameStatusRequest
 {

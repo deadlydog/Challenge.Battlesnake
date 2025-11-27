@@ -1,4 +1,4 @@
-namespace Battlesnake.WebApi.Model;
+namespace Battlesnake.WebApi.BattlesnakeApi.Model;
 
 /// <summary>
 /// Information about the ruleset being used to run this game.

@@ -1,4 +1,4 @@
-namespace Battlesnake.WebApi.Responses;
+namespace Battlesnake.WebApi.BattlesnakeApi.Responses;
 
 public class InitResponse
 {
