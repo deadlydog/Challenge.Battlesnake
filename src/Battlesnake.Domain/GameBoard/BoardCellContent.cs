@@ -1,4 +1,4 @@
-namespace Battlesnake.Domain.Board;
+namespace Battlesnake.Domain.GameBoard;
 
 public enum BoardCellContent
 {

@@ -2,11 +2,11 @@ namespace Battlesnake.Domain;
 
 public class TurnDecision
 {
-	public MoveDirection Move { get; init; }
+	public MoveDirections Move { get; init; }
 	public string ShoutMessage { get; init; } = string.Empty;
 }
 
-public enum MoveDirection
+public enum MoveDirections
 {
 	Up,
 	Down,

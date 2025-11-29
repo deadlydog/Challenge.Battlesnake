@@ -1,3 +1,5 @@
+using Battlesnake.Domain.GameBoard;
+
 namespace Battlesnake.Domain;
 
 public class Game
@@ -12,12 +14,12 @@ public class Game
 		Settings = settings;
 	}
 
-	public TurnDecision MakeMove(Board.Board board)
+	public TurnDecision MakeMove(Board board)
 	{
 		// Placeholder logic: always move up with no shout message.
 		return new TurnDecision
 		{
-			Move = MoveDirection.Up,
+			Move = MoveDirections.Up,
 			ShoutMessage = string.Empty
 		};
 	}

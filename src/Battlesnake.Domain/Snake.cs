@@ -1,5 +1,3 @@
-using System;
-
 namespace Battlesnake.Domain;
 
 public class Snake

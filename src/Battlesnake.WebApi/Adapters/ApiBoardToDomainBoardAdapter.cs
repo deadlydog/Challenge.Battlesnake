@@ -1,5 +1,7 @@
+using Battlesnake.Domain.GameBoard;
+
 namespace Battlesnake.WebApi.Adapters;
-using DomainBoard = Battlesnake.Domain.Board.Board;
+using DomainBoard = Board;
 using WebApiBoard = BattlesnakeApi.Model.Board;
 
 public static class ApiBoardToDomainBoardAdapter
