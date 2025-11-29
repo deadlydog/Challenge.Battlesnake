@@ -2,13 +2,18 @@ namespace Battlesnake.Domain;
 
 public class Snake
 {
-	public string Id { get; set; }
+	public string Id { get; }
 
-	public int Length { get; set; }
+	public int Length { get; }
 
-	public static Snake Empty => new Snake
+	public int Health { get; }
+
+	public Snake(string id, int length, int health)
 	{
-		Id = string.Empty,
-		Length = 0
-	};
+		Id = id;
+		Length = length;
+		Health = health;
+	}
+
+	public static Snake Empty => new Snake(string.Empty, 0, 0);
 }
