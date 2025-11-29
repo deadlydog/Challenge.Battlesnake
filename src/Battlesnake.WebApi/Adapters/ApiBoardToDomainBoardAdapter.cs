@@ -10,24 +10,17 @@ public static class ApiBoardToDomainBoardAdapter
 
 		foreach (var food in apiBoard.Food)
 		{
-			domainBoard.Cells[food.X, food.Y].Content = Domain.Board.BoardCellContent.Food;
+			domainBoard.AddFood(food.X, food.Y);
 		}
 
 		foreach (var hazard in apiBoard.Hazards)
 		{
-			domainBoard.Cells[hazard.X, hazard.Y].Content = Domain.Board.BoardCellContent.Hazard;
+			domainBoard.AddHazard(hazard.X, hazard.Y);
 		}
 
 		foreach (var snake in apiBoard.Snakes)
 		{
-			var domainSnake = new Domain.Snake(snake.Id, snake.Length, snake.Health);
-
-			foreach (var segment in snake.Body)
-			{
-				domainBoard.Cells[segment.X, segment.Y].Content = Domain.Board.BoardCellContent.SnakeBody;
-				domainBoard.Cells[segment.X, segment.Y].OccupyingSnake = domainSnake;
-			}
-			domainBoard.Cells[snake.Head.X, snake.Head.Y].Content = Domain.Board.BoardCellContent.SnakeHead;
+			domainBoard.AddSnake(snake.Id, snake.Health, snake.Body.Select(coord => (coord.X, coord.Y)));
 		}
 
 		return domainBoard;
