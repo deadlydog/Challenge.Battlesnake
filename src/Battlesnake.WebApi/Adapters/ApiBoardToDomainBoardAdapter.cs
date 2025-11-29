@@ -4,7 +4,7 @@ using WebApiBoard = BattlesnakeApi.Model.Board;
 
 public static class ApiBoardToDomainBoardAdapter
 {
-	public static DomainBoard Convert(WebApiBoard apiBoard)
+	public static DomainBoard Convert(WebApiBoard apiBoard, string playerSnakeId)
 	{
 		var domainBoard = new DomainBoard(apiBoard.Width, apiBoard.Height);
 
@@ -20,7 +20,9 @@ public static class ApiBoardToDomainBoardAdapter
 
 		foreach (var snake in apiBoard.Snakes)
 		{
-			domainBoard.AddSnake(snake.Id, snake.Health, snake.Body.Select(coord => (coord.X, coord.Y)));
+			domainBoard.AddSnake(snake.Id, snake.Health,
+				snake.Body.Select(coord => new Domain.Coordinate(coord.X, coord.Y)),
+				string.Equals(snake.Id, playerSnakeId));
 		}
 
 		return domainBoard;

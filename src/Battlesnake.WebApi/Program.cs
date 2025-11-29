@@ -1,3 +1,4 @@
+using Battlesnake.WebApi.Adapters;
 using Battlesnake.WebApi.BattlesnakeApi.Requests;
 using Battlesnake.WebApi.BattlesnakeApi.Responses;
 
@@ -40,7 +41,9 @@ app.MapPost("/move", (GameStatusRequest gameStatusRequest) =>
 {
     var direction = new List<string> { "down", "left", "right", "up" };
 
-    return new MoveResponse
+	var board = ApiBoardToDomainBoardAdapter.Convert(gameStatusRequest.Board, gameStatusRequest.You.Id);
+
+	return new MoveResponse
     {
         Move = direction[Random.Shared.Next(direction.Count)],
         Shout = "I am moving!"
