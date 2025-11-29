@@ -28,4 +28,9 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Battlesnake.Domain\Battlesnake.Domain.csproj" />
+    <ProjectReference Include="..\Battlesnake.WebApi\Battlesnake.WebApi.csproj" />
+  </ItemGroup>
+
 </Project>

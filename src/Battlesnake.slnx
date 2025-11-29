@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="Battlesnake.Domain/Battlesnake.Domain.csproj" />
+  <Project Path="Battlesnake.Domain/Battlesnake.Domain.csproj" Id="fc37bed9-c464-45b1-8c18-d72c04e16c65" />
   <Project Path="Battlesnake.WebApi.Tests/Battlesnake.WebApi.Tests.csproj" Id="2ff04d5e-260c-4944-9c9c-1c371acea137" />
   <Project Path="Battlesnake.WebApi/Battlesnake.WebApi.csproj" />
 </Solution>
