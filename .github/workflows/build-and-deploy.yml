@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  SolutionPath: ./src/Battlesnake.sln
+  SolutionPath: ./src/Battlesnake.slnx
   WebApiProjectPath: ./src/Battlesnake.WebApi/Battlesnake.WebApi.csproj
   ArtifactsPath: ${{ github.workspace }}/battlesnake-app
   ArtifactsName: battlesnake-app
@@ -33,10 +33,10 @@ jobs:
         run: dotnet build ${{ env.SolutionPath }} --configuration Release
 
       - name: Test with dotnet
-        run: dotnet test ${{ env.SolutionPath }} --configuration Release --no-build --verbosity normal
+        run: dotnet test ${{ env.SolutionPath }} --configuration Release --no-build
 
       - name: Publish with dotnet
-        run: dotnet publish ${{ env.WebApiProjectPath }} -c Release -o "${{ env.ArtifactsPath }}"
+        run: dotnet publish ${{ env.WebApiProjectPath }} --configuration Release --output "${{ env.ArtifactsPath }}"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
