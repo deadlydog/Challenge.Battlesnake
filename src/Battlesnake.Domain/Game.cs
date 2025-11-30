@@ -10,6 +10,16 @@ public class Game
 
 	public Game(string id, GameSettings settings)
 	{
+		if (string.IsNullOrWhiteSpace(id))
+		{
+			throw new ArgumentException("Game ID cannot be null or whitespace.", nameof(id));
+		}
+
+		if (settings == null)
+		{
+			throw new ArgumentNullException(nameof(settings), "Game settings cannot be null.");
+		}
+
 		Id = id;
 		Settings = settings;
 	}
