@@ -29,7 +29,7 @@ public class Game
 		// Placeholder logic: always move up with no shout message.
 		return new TurnDecision
 		{
-			Move = MoveDirections.Up,
+			MoveDirection = MoveDirections.Up,
 			ShoutMessage = string.Empty
 		};
 	}

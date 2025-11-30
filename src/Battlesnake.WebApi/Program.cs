@@ -42,11 +42,13 @@ app.MapPost("/move", (GameStatusRequest gameStatusRequest) =>
     var direction = new List<string> { "down", "left", "right", "up" };
 
 	var board = ApiBoardToDomainBoardAdapter.Convert(gameStatusRequest.Board, gameStatusRequest.You.Id);
+	var game = new Battlesnake.Domain.Game(gameStatusRequest.Game.Id, RulesetToGameSettingsAdapter.Convert(gameStatusRequest.Game.Ruleset));
+	var decision = game.MakeMove(board);
 
 	return new MoveResponse
     {
-        Move = direction[Random.Shared.Next(direction.Count)],
-        Shout = "I am moving!"
+        Move = MoveDirectionsToResponseStringAdapter.Convert(decision.MoveDirection),
+        Shout = decision.ShoutMessage
     };
 });
 

@@ -3,6 +3,12 @@ namespace Battlesnake.Domain;
 public record GameSettings
 {
 	/// <summary>
+	/// Name of the ruleset being used to run this game.
+	/// Possible values include: standard, solo, royale, squad, constrictor, wrapped.
+	/// </summary>
+	public GameModes GameMode {  get; init; }
+
+	/// <summary>
 	/// The percentage chance (0-100) that food will spawn on an empty cell each round.
 	/// </summary>
 	public int FoodSpawnChancePercentage { get; init; }
@@ -52,4 +58,14 @@ public record GameSettings
 		/// </summary>
 		public bool SharedLength { get; init; }
 	}
+}
+
+public enum GameModes
+{
+	Standard,
+	Solo,
+	Royale,
+	Squad,
+	Constrictor,
+	Wrapped
 }
