@@ -8,11 +8,11 @@ public class Game
 
 	public GameSettings Settings { get; init; }
 
-	public Game(string id, GameSettings settings)
+	public Game(string gameId, GameSettings settings)
 	{
-		if (string.IsNullOrWhiteSpace(id))
+		if (string.IsNullOrWhiteSpace(gameId))
 		{
-			throw new ArgumentException("Game ID cannot be null or whitespace.", nameof(id));
+			throw new ArgumentException("Game ID cannot be null or whitespace.", nameof(gameId));
 		}
 
 		if (settings == null)
@@ -20,7 +20,7 @@ public class Game
 			throw new ArgumentNullException(nameof(settings), "Game settings cannot be null.");
 		}
 
-		Id = id;
+		Id = gameId;
 		Settings = settings;
 	}
 
