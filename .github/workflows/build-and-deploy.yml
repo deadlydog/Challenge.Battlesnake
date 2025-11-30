@@ -1,0 +1,73 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy Battlesnake Web App to Azure
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  SolutionPath: ./src/Battlesnake.sln
+  WebApiProjectPath: ./src/Battlesnake.WebApi/Battlesnake.WebApi.csproj
+  ArtifactsPath: ${{ github.workspace }}/battlesnake-app
+  ArtifactsName: battlesnake-app
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: read #This is required for actions/checkout
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.x'
+
+      - name: Build with dotnet
+        run: dotnet build ${{ env.SolutionPath }} --configuration Release
+
+      - name: Test with dotnet
+        run: dotnet test ${{ env.SolutionPath }} --configuration Release --no-build --verbosity normal
+
+      - name: Publish with dotnet
+        run: dotnet publish ${{ env.WebApiProjectPath }} -c Release -o "${{ env.ArtifactsPath }}"
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ArtifactsName }}
+          path: ${{ env.ArtifactsPath }}
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    permissions:
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.ArtifactsName }}
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8E587E93300844F1B7B919EF0166A3CE }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_3606D5DF622644A7B888815B09D902F5 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_62BA459FDA5242109651BDF13A168F47 }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'dans-battlesnake'
+          slot-name: 'Production'
+          package: .
