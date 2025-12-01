@@ -4,23 +4,23 @@ namespace Battlesnake.Domain.MovementStrategies;
 
 public class AvoidHittingWallsStrategy : IMovementStrategy
 {
-	public static readonly int WallPenaltyScore = -1000;
+	public static readonly int HitWallScorePenalty = -1000;
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{
-		var scores = new DirectionScores();
+		var directionScores = new DirectionScores();
 
 		var head = board.OurSnakeHeadPosition;
 
 		// Avoid walls by penalizing moves that would hit the wall
 		if (head.Y == 0)
-			scores.AddScore(MoveDirections.Down, WallPenaltyScore); // Wall at bottom
+			directionScores.AddScore(MoveDirections.Down, HitWallScorePenalty); // Wall at bottom
 		if (head.Y == board.Height - 1)
-			scores.AddScore(MoveDirections.Up, WallPenaltyScore); // Wall at top
+			directionScores.AddScore(MoveDirections.Up, HitWallScorePenalty); // Wall at top
 		if (head.X == 0)
-			scores.AddScore(MoveDirections.Left, WallPenaltyScore); // Wall at left
+			directionScores.AddScore(MoveDirections.Left, HitWallScorePenalty); // Wall at left
 		if (head.X == board.Width - 1)
-			scores.AddScore(MoveDirections.Right, WallPenaltyScore); // Wall at right
-		return scores;
+			directionScores.AddScore(MoveDirections.Right, HitWallScorePenalty); // Wall at right
+		return directionScores;
 	}
 }

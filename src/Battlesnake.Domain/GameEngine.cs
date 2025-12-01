@@ -11,6 +11,7 @@ public static class GameEngine
 
 		directionScores += AvoidHittingWallsStrategy.CalculateDirectionScores(board);
 		directionScores += AvoidHittingSnakesStrategy.CalculateDirectionScores(board);
+		directionScores += EatCloseFoodStrategy.CalculateDirectionScores(board);
 
 		var bestDirectionsToMove = directionScores.GetHighestScoreDirection();
 		var directionToMove = bestDirectionsToMove.First();

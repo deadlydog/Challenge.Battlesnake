@@ -9,7 +9,7 @@ public class AvoidHittingWallsStrategyTests
 	[Fact]
 	public void WallPenaltyScore_IsNegative()
 	{
-		AvoidHittingWallsStrategy.WallPenaltyScore.ShouldBeLessThan(0);
+		AvoidHittingWallsStrategy.HitWallScorePenalty.ShouldBeLessThan(0);
 	}
 
 	[Fact]
@@ -30,7 +30,7 @@ public class AvoidHittingWallsStrategyTests
 		// Assert
 		directionScores.Up.ShouldBe(0);
 		directionScores.Down.ShouldBe(0);
-		directionScores.Left.ShouldBe(AvoidHittingWallsStrategy.WallPenaltyScore); // Reduced score towards wall
+		directionScores.Left.ShouldBe(AvoidHittingWallsStrategy.HitWallScorePenalty); // Reduced score towards wall
 		directionScores.Right.ShouldBe(0);
 	}
 
@@ -51,7 +51,7 @@ public class AvoidHittingWallsStrategyTests
 		directionScores.Up.ShouldBe(0);
 		directionScores.Down.ShouldBe(0);
 		directionScores.Left.ShouldBe(0);
-		directionScores.Right.ShouldBe(AvoidHittingWallsStrategy.WallPenaltyScore); // Reduced score towards wall
+		directionScores.Right.ShouldBe(AvoidHittingWallsStrategy.HitWallScorePenalty); // Reduced score towards wall
 	}
 
 	[Fact]
@@ -68,7 +68,7 @@ public class AvoidHittingWallsStrategyTests
 		// Act
 		var directionScores = AvoidHittingWallsStrategy.CalculateDirectionScores(board);
 		// Assert
-		directionScores.Up.ShouldBe(AvoidHittingWallsStrategy.WallPenaltyScore); // Reduced score towards wall
+		directionScores.Up.ShouldBe(AvoidHittingWallsStrategy.HitWallScorePenalty); // Reduced score towards wall
 		directionScores.Down.ShouldBe(0);
 		directionScores.Left.ShouldBe(0);
 		directionScores.Right.ShouldBe(0);
@@ -89,7 +89,7 @@ public class AvoidHittingWallsStrategyTests
 		var directionScores = AvoidHittingWallsStrategy.CalculateDirectionScores(board);
 		// Assert
 		directionScores.Up.ShouldBe(0);
-		directionScores.Down.ShouldBe(AvoidHittingWallsStrategy.WallPenaltyScore); // Reduced score towards wall
+		directionScores.Down.ShouldBe(AvoidHittingWallsStrategy.HitWallScorePenalty); // Reduced score towards wall
 		directionScores.Left.ShouldBe(0);
 		directionScores.Right.ShouldBe(0);
 	}
@@ -129,8 +129,8 @@ public class AvoidHittingWallsStrategyTests
 		var directionScores = AvoidHittingWallsStrategy.CalculateDirectionScores(board);
 		// Assert
 		directionScores.Up.ShouldBe(0);
-		directionScores.Down.ShouldBe(AvoidHittingWallsStrategy.WallPenaltyScore); // Reduced score towards bottom wall
-		directionScores.Left.ShouldBe(AvoidHittingWallsStrategy.WallPenaltyScore); // Reduced score towards left wall
+		directionScores.Down.ShouldBe(AvoidHittingWallsStrategy.HitWallScorePenalty); // Reduced score towards bottom wall
+		directionScores.Left.ShouldBe(AvoidHittingWallsStrategy.HitWallScorePenalty); // Reduced score towards left wall
 		directionScores.Right.ShouldBe(0);
 	}
 }

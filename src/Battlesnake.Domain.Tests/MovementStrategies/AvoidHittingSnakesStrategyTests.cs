@@ -9,11 +9,11 @@ public class AvoidHittingSnakesStrategyTests
 	[Fact]
 	public void PenaltyScores_AreNegative()
 	{
-		AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore.ShouldBeLessThan(0);
-		AvoidHittingSnakesStrategy.SnakeTailPenaltyScore.ShouldBeLessThan(0);
+		AvoidHittingSnakesStrategy.HitSnakeBodyScorePenalty.ShouldBeLessThan(0);
+		AvoidHittingSnakesStrategy.HitSnakeTailScorePenalty.ShouldBeLessThan(0);
 
 		// Score for hitting body should be more severe than hitting tail.
-		AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore.ShouldBeLessThan(AvoidHittingSnakesStrategy.SnakeTailPenaltyScore);
+		AvoidHittingSnakesStrategy.HitSnakeBodyScorePenalty.ShouldBeLessThan(AvoidHittingSnakesStrategy.HitSnakeTailScorePenalty);
 	}
 
 	[Fact]
@@ -32,7 +32,7 @@ public class AvoidHittingSnakesStrategyTests
 		var directionScores = AvoidHittingSnakesStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Up.ShouldBe(AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore); // Reduced score towards own body
+		directionScores.Up.ShouldBe(AvoidHittingSnakesStrategy.HitSnakeBodyScorePenalty); // Reduced score towards own body
 		directionScores.Down.ShouldBe(0);
 		directionScores.Left.ShouldBe(0);
 		directionScores.Right.ShouldBe(0);
@@ -60,8 +60,8 @@ public class AvoidHittingSnakesStrategyTests
 		var directionScores = AvoidHittingSnakesStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Up.ShouldBe(AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore); // Reduced score towards own body
-		directionScores.Down.ShouldBe(AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore); // Reduced score towards opponent's body
+		directionScores.Up.ShouldBe(AvoidHittingSnakesStrategy.HitSnakeBodyScorePenalty); // Reduced score towards own body
+		directionScores.Down.ShouldBe(AvoidHittingSnakesStrategy.HitSnakeBodyScorePenalty); // Reduced score towards opponent's body
 		directionScores.Left.ShouldBe(0);
 		directionScores.Right.ShouldBe(0);
 	}
@@ -94,9 +94,9 @@ public class AvoidHittingSnakesStrategyTests
 		var directionScores = AvoidHittingSnakesStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Up.ShouldBe(AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore);
-		directionScores.Down.ShouldBe(AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore);
-		directionScores.Left.ShouldBe(AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore);
+		directionScores.Up.ShouldBe(AvoidHittingSnakesStrategy.HitSnakeBodyScorePenalty);
+		directionScores.Down.ShouldBe(AvoidHittingSnakesStrategy.HitSnakeBodyScorePenalty);
+		directionScores.Left.ShouldBe(AvoidHittingSnakesStrategy.HitSnakeBodyScorePenalty);
 		directionScores.Right.ShouldBe(0);
 	}
 
@@ -134,9 +134,9 @@ public class AvoidHittingSnakesStrategyTests
 		var directionScores = AvoidHittingSnakesStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Up.ShouldBe(AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore);
-		directionScores.Down.ShouldBe(AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore);
-		directionScores.Left.ShouldBe(AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore);
-		directionScores.Right.ShouldBe(AvoidHittingSnakesStrategy.SnakeTailPenaltyScore); // Less severe penalty for tail
+		directionScores.Up.ShouldBe(AvoidHittingSnakesStrategy.HitSnakeBodyScorePenalty);
+		directionScores.Down.ShouldBe(AvoidHittingSnakesStrategy.HitSnakeBodyScorePenalty);
+		directionScores.Left.ShouldBe(AvoidHittingSnakesStrategy.HitSnakeBodyScorePenalty);
+		directionScores.Right.ShouldBe(AvoidHittingSnakesStrategy.HitSnakeTailScorePenalty); // Less severe penalty for tail
 	}
 }
