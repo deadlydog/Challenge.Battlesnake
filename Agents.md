@@ -8,13 +8,13 @@ This is a C# implementation of a [Battlesnake](https://play.battlesnake.com) AI 
 
 ### Three-Layer Design
 
-- **`Battlesnake.WebApi`**: ASP.NET Core minimal API implementing Battlesnake HTTP endpoints (`/`, `/start`, `/move`, `/end`)
-- **`Battlesnake.Domain`**: Core game logic with no external dependencies - contains the decision-making engine
-- **`Battlesnake.Domain.Tests`**: xUnit tests using Shouldly for assertions
+- __`Battlesnake.WebApi`__: ASP.NET Core minimal API implementing Battlesnake HTTP endpoints (`/`, `/start`, `/move`, `/end`)
+- __`Battlesnake.Domain`__: Core game logic with no external dependencies - contains the decision-making engine
+- __`Battlesnake.Domain.Tests`__: xUnit tests using Shouldly for assertions
 
 ### Decision-Making Engine (`GameEngine.cs`)
 
-The core pattern is **score-based strategy composition**:
+The core pattern is __score-based strategy composition__:
 
 1. Each movement strategy returns a `DirectionScores` object with scores for moving the player's snake Up/Down/Left/Right, where the highest score is the best move
 
@@ -33,22 +33,23 @@ public interface IMovementStrategy
 
 `Board` uses a 2D `BoardCell[,]` array where:
 
-- **Coordinate system**: `(0,0)` is bottom-left, Y increases upward
-- **Snake tracking**: First coordinate in body list is the head, last is the tail
-- **Cell contents**: Enum `BoardCellContent` (Empty, Food, Hazard, SnakeBody, SnakeHead, SnakeTail)
-- **Our snake**: Board tracks `OurSnake`, `OurSnakeHeadPosition`, `OurSnakeTailPosition` for quick access
+- __Coordinate system__: `(0,0)` is bottom-left, Y increases upward
+- __Snake tracking__: First coordinate in body list is the head, last is the tail
+- __Cell contents__: Enum `BoardCellContent` (Empty, Food, Hazard, SnakeBody, SnakeHead, SnakeTail)
+- __Our snake__: Board tracks `OurSnake`, `OurSnakeHeadPosition`, `OurSnakeTailPosition` for quick access
 
 ### Testing Standards
 
-- **Test framework**: xUnit v3 with Shouldly assertions (NOT FluentAssertions)
-- **Naming**: `WhenSituationX_ThenOutcomeY` pattern
-- **Coverage**: Movement strategies have comprehensive edge case tests (corners, center, all walls)
+- __Test framework__: xUnit v3 with Shouldly assertions (NOT FluentAssertions)
+- __Naming__: `WhenSituationX_ThenOutcomeY` pattern
+- __Structure__: Arrange-Act-Assert within each test, with an empty line between sections
+- __Coverage__: Movement strategies have comprehensive edge case tests (corners, center, all walls)
 
 ### Project Configuration
 
-- **Target framework**: .NET 10.0 (`net10.0`)
-- **Solution file**: Uses new `.slnx` format (not `.sln`)
-- **API ports**: HTTPS on 5001, HTTP on 5000
+- __Target framework__: .NET 10.0 (`net10.0`)
+- __Solution file__: Uses new `.slnx` format (not `.sln`)
+- __API ports__: HTTPS on 5001, HTTP on 5000
 
 ## Development Workflows
 
@@ -68,4 +69,4 @@ battlesnake play -W 11 -H 11 --name test_snake --url https://localhost:5001/ -g 
 
 ## External Integration
 
-- **Battlesnake API**: v1 spec from https://docs.battlesnake.com/api
+- __Battlesnake API__: v1 spec from https://docs.battlesnake.com/api
