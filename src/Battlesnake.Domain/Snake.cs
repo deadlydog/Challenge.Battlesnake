@@ -8,7 +8,13 @@ public record Snake
 
 	public int Health { get; init; }
 
-	public Snake(string id, int length, int health)
+	public IEnumerable<Coordinate> Body { get; init; } = Enumerable.Empty<Coordinate>();
+
+	public Coordinate Head => Body.First();
+
+	public Coordinate Tail => Body.Last();
+
+	public Snake(string id, int length, int health, IEnumerable<Coordinate> body)
 	{
 		if (string.IsNullOrWhiteSpace(id))
 		{
@@ -25,8 +31,14 @@ public record Snake
 			throw new ArgumentException("Snake health must be between 0 and 100.", nameof(health));
 		}
 
+		if (body == null || !body.Any())
+		{
+			throw new ArgumentException("Snake body must contain at least one coordinate.", nameof(body));
+		}
+
 		Id = id;
 		Length = length;
 		Health = health;
+		Body = body;
 	}
 }

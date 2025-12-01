@@ -1,3 +1,5 @@
+using Battlesnake.Domain.MovementStrategies;
+
 namespace Battlesnake.Domain.GameBoard;
 
 public class Board
@@ -11,6 +13,12 @@ public class Board
 	public Snake OurSnake { get; private set; } = null!;
 	public Coordinate OurSnakeHeadPosition { get; private set; } = null!;
 	public Coordinate OurSnakeTailPosition { get; private set; } = null!;
+
+	private List<Coordinate> _foodCells = new List<Coordinate>();
+	public IReadOnlyList<Coordinate> FoodCells => _foodCells.AsReadOnly();
+
+	private List<Coordinate> _hazardCells = new List<Coordinate>();
+	public IReadOnlyList<Coordinate> HazardCells => _hazardCells.AsReadOnly();
 
 	public Board(int width, int height)
 	{
@@ -35,11 +43,13 @@ public class Board
 	public void AddFood(int x, int y)
 	{
 		_cells[x, y].Content = BoardCellContent.Food;
+		_foodCells.Add(new Coordinate(x, y));
 	}
 
 	public void AddHazard(int x, int y)
 	{
 		_cells[x, y].Content = BoardCellContent.Hazard;
+		_hazardCells.Add(new Coordinate(x, y));
 	}
 
 	/// <summary>
@@ -53,7 +63,7 @@ public class Board
 	{
 		var snakeBody = body.ToList();
 
-		var snake = new Snake(id, snakeBody.Count, health);
+		var snake = new Snake(id, snakeBody.Count, health, body);
 		_snakes.Add(snake);
 
 		int headX = snakeBody.First().X;
