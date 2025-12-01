@@ -10,6 +10,7 @@ public class Board
 
 	public Snake OurSnake { get; private set; }
 	public Coordinate OurSnakeHeadPosition { get; private set; }
+	public Coordinate OurSnakeTailPosition { get; private set; }
 
 	public Board(int width, int height)
 	{
@@ -57,6 +58,8 @@ public class Board
 
 		int headX = snakeBody.First().X;
 		int headY = snakeBody.First().Y;
+		int tailX = snakeBody.Last().X;
+		int tailY = snakeBody.Last().Y;
 
 		foreach (var segment in snakeBody)
 		{
@@ -64,11 +67,18 @@ public class Board
 			_cells[segment.X, segment.Y].OccupyingSnake = snake;
 		}
 		_cells[headX, headY].Content = BoardCellContent.SnakeHead;
+		_cells[tailX, tailY].Content = BoardCellContent.SnakeTail;
 
 		if (isOurSnake)
 		{
 			OurSnake = snake;
 			OurSnakeHeadPosition = new Coordinate(headX, headY);
+			OurSnakeTailPosition = new Coordinate(tailX, tailY);
 		}
+	}
+
+	public BoardCell GetCell(int x, int y)
+	{
+		return _cells[x, y];
 	}
 }

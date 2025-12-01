@@ -5,6 +5,7 @@ public enum BoardCellContent
 	Empty,
 	Food,
 	Hazard,
+	SnakeHead,
 	SnakeBody,
-	SnakeHead
+	SnakeTail
 }
