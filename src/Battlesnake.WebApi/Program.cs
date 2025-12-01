@@ -42,7 +42,7 @@ app.MapPost("/move", (GameStatusRequest gameStatusRequest) =>
 {
 	var board = ApiBoardToDomainBoardAdapter.Convert(gameStatusRequest.Board, gameStatusRequest.You.Id);
 	var gameSettings = ApiGameToDomainGameSettingsAdapter.Convert(gameStatusRequest.Game);
-	var decision = GameEngine.MakeMove(gameSettings, board);
+	var decision = GameEngine.MakeMove(gameSettings, board, gameStatusRequest.Turn);
 
 	return new MoveResponse
     {

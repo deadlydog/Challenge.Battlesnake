@@ -48,4 +48,9 @@ public class DirectionScores
 		result.Right = a.Right + b.Right;
 		return result;
 	}
+
+	public override string ToString()
+	{
+		return $"Up: {Up}, Down: {Down}, Left: {Left}, Right: {Right}";
+	}
 }
