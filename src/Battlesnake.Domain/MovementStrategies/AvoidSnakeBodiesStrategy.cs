@@ -2,10 +2,10 @@ using Battlesnake.Domain.GameBoard;
 
 namespace Battlesnake.Domain.MovementStrategies;
 
-public class AvoidSnakeBodies : IMovementStrategy
+public class AvoidSnakeBodiesStrategy : IMovementStrategy
 {
-	private static readonly int SnakeBodyPenaltyScore = -500;
-	private static readonly int SnakeTailPenaltyScore = -100;
+	public static readonly int SnakeBodyPenaltyScore = -500;
+	public static readonly int SnakeTailPenaltyScore = -100;
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{

@@ -58,4 +58,44 @@ public static class DirectionScoresTests
 			result.Right.ShouldBe(-5);
 		}
 	}
+
+	public class WhenGettingTheBestDirection
+	{
+		[Fact]
+		public void ThenTheDirectionWithTheHighestScoreIsReturned()
+		{
+			// Arrange
+			var scores = new DirectionScores();
+			scores.AddScore(MoveDirections.Up, -1000);
+			scores.AddScore(MoveDirections.Down, 20);
+			scores.AddScore(MoveDirections.Left, 15);
+			scores.AddScore(MoveDirections.Right, -500);
+
+			// Act
+			var bestDirection = scores.GetHighestScoreDirection();
+
+			// Assert
+			bestDirection.Count().ShouldBe(1);
+			bestDirection.First().ShouldBe(MoveDirections.Down);
+		}
+
+		[Fact]
+		public void WhenMultipleDirectionsHaveSameHighestScore_ThenAllOfThemAreReturned()
+		{
+			// Arrange
+			var scores = new DirectionScores();
+			scores.AddScore(MoveDirections.Up, 10);
+			scores.AddScore(MoveDirections.Down, 10);
+			scores.AddScore(MoveDirections.Left, 5);
+			scores.AddScore(MoveDirections.Right, 0);
+
+			// Act
+			var bestDirection = scores.GetHighestScoreDirection();
+
+			// Assert
+			bestDirection.Count().ShouldBe(2);
+			bestDirection.ShouldContain(MoveDirections.Up);
+			bestDirection.ShouldContain(MoveDirections.Down);
+		}
+	}
 }
