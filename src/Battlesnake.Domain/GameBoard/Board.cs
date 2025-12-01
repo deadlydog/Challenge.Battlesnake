@@ -5,6 +5,9 @@ public class Board
 	private readonly BoardCell[,] _cells;
 	private readonly List<Snake> _snakes = new List<Snake>();
 
+	public int Width { get; private set; }
+	public int Height { get; private set; }
+
 	public Snake OurSnake { get; private set; }
 	public Coordinate OurSnakeHeadPosition { get; private set; }
 
@@ -14,6 +17,9 @@ public class Board
 		{
 			throw new ArgumentException($"Board dimensions must be at least 2x2. Provided dimensions were {width} x {height}.");
 		}
+
+		Width = width;
+		Height = height;
 
 		_cells = new BoardCell[width, height];
 		for (int x = 0; x < width; x++)
@@ -49,16 +55,20 @@ public class Board
 		var snake = new Snake(id, snakeBody.Count, health);
 		_snakes.Add(snake);
 
+		int headX = snakeBody.First().X;
+		int headY = snakeBody.First().Y;
+
 		foreach (var segment in snakeBody)
 		{
 			_cells[segment.X, segment.Y].Content = BoardCellContent.SnakeBody;
 			_cells[segment.X, segment.Y].OccupyingSnake = snake;
 		}
-		_cells[snakeBody.First().X, snakeBody.First().Y].Content = BoardCellContent.SnakeHead;
+		_cells[headX, headY].Content = BoardCellContent.SnakeHead;
 
 		if (isOurSnake)
 		{
 			OurSnake = snake;
+			OurSnakeHeadPosition = new Coordinate(headX, headY);
 		}
 	}
 }
