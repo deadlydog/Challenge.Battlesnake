@@ -4,7 +4,7 @@ namespace Battlesnake.Domain.MovementStrategies;
 
 public class DoNotHitWallsStrategy : IMovementStrategy
 {
-	public static readonly int HitWallScorePenalty = -1000;
+	public static readonly int HitWallScorePenalty = -10000;
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{

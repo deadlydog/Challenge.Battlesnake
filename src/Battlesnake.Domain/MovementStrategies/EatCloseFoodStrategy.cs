@@ -4,7 +4,7 @@ namespace Battlesnake.Domain.MovementStrategies;
 
 public class EatCloseFoodStrategy : IMovementStrategy
 {
-	public static readonly int EatFoodScoreBoost = 100;
+	public static readonly int EatFoodScoreBoost = 1000;
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{

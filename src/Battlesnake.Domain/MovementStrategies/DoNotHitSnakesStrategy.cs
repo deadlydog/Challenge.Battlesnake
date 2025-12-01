@@ -4,8 +4,8 @@ namespace Battlesnake.Domain.MovementStrategies;
 
 public class DoNotHitSnakesStrategy : IMovementStrategy
 {
-	public static readonly int HitSnakeBodyScorePenalty = -500;
-	public static readonly int HitSnakeTailScorePenalty = -100; // Lower penalty for tails since they will likely move, unless the snake eats food on next turn.
+	public static readonly int HitSnakeBodyScorePenalty = -5000;
+	public static readonly int HitSnakeTailScorePenalty = -1000; // Lower penalty for tails since they will likely move, unless the snake eats food on next turn.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{
