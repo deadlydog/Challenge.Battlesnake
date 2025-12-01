@@ -4,7 +4,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Battlesnake.WebApi.Tests</RootNamespace>
+    <RootNamespace>Battlesnake.Domain.Tests</RootNamespace>
     <TargetFramework>net10.0</TargetFramework>
     <!--
     This template uses native xUnit.net command line options when using 'dotnet run' and
@@ -24,13 +24,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageReference Include="Shouldly" Version="4.3.0" />
     <PackageReference Include="xunit.v3" Version="3.2.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Battlesnake.Domain\Battlesnake.Domain.csproj" />
-    <ProjectReference Include="..\Battlesnake.WebApi\Battlesnake.WebApi.csproj" />
   </ItemGroup>
 
 </Project>
