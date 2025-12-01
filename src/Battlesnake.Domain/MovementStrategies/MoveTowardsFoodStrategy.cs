@@ -5,7 +5,7 @@ namespace Battlesnake.Domain.MovementStrategies;
 
 public class MoveTowardsFoodStrategy : IMovementStrategy
 {
-	public static readonly int FoodProximityMultiplier = 10;
+	public static readonly int FoodProximityMultiplier = 50;
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{
@@ -17,8 +17,8 @@ public class MoveTowardsFoodStrategy : IMovementStrategy
 			int yDelta = board.OurSnakeHeadPosition.Y - food.Y;
 
 			// The closer the player is to the cell, the more inticing it should be.
-			int xScore = (board.Width - xDelta) * FoodProximityMultiplier;
-			int yScore = (board.Height - yDelta) * FoodProximityMultiplier;
+			int xScore = (board.Width - Math.Abs(xDelta)) * FoodProximityMultiplier;
+			int yScore = (board.Height - Math.Abs(yDelta)) * FoodProximityMultiplier;
 			
 			if (xDelta > 0)
 			{
