@@ -4,13 +4,13 @@ using Shouldly;
 
 namespace Battlesnake.Domain.Tests.MovementStrategies;
 
-public class AvoidSnakeBodiesStrategyTests
+public class AvoidHittingSnakesStrategyTests
 {
 	[Fact]
 	public void PenaltyScores_AreNegative()
 	{
-		AvoidSnakeBodiesStrategy.SnakeBodyPenaltyScore.ShouldBeLessThan(0);
-		AvoidSnakeBodiesStrategy.SnakeTailPenaltyScore.ShouldBeLessThan(0);
+		AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore.ShouldBeLessThan(0);
+		AvoidHittingSnakesStrategy.SnakeTailPenaltyScore.ShouldBeLessThan(0);
 	}
 
 	[Fact]
@@ -26,10 +26,10 @@ public class AvoidSnakeBodiesStrategyTests
 		}, true);
 
 		// Act
-		var directionScores = AvoidSnakeBodiesStrategy.CalculateDirectionScores(board);
+		var directionScores = AvoidHittingSnakesStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Up.ShouldBe(AvoidSnakeBodiesStrategy.SnakeBodyPenaltyScore); // Reduced score towards own body
+		directionScores.Up.ShouldBe(AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore); // Reduced score towards own body
 		directionScores.Down.ShouldBe(0);
 		directionScores.Left.ShouldBe(0);
 		directionScores.Right.ShouldBe(0);
@@ -54,11 +54,11 @@ public class AvoidSnakeBodiesStrategyTests
 		}, false);
 
 		// Act
-		var directionScores = AvoidSnakeBodiesStrategy.CalculateDirectionScores(board);
+		var directionScores = AvoidHittingSnakesStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Up.ShouldBe(AvoidSnakeBodiesStrategy.SnakeBodyPenaltyScore); // Reduced score towards own body
-		directionScores.Down.ShouldBe(AvoidSnakeBodiesStrategy.SnakeBodyPenaltyScore); // Reduced score towards opponent's body
+		directionScores.Up.ShouldBe(AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore); // Reduced score towards own body
+		directionScores.Down.ShouldBe(AvoidHittingSnakesStrategy.SnakeBodyPenaltyScore); // Reduced score towards opponent's body
 		directionScores.Left.ShouldBe(0);
 		directionScores.Right.ShouldBe(0);
 	}

@@ -9,8 +9,8 @@ public static class GameEngine
 	{
 		var directionScores = new DirectionScores();
 
-		directionScores += AvoidWallsStrategy.CalculateDirectionScores(board);
-		directionScores += AvoidSnakeBodiesStrategy.CalculateDirectionScores(board);
+		directionScores += AvoidHittingWallsStrategy.CalculateDirectionScores(board);
+		directionScores += AvoidHittingSnakesStrategy.CalculateDirectionScores(board);
 
 		var bestDirectionsToMove = directionScores.GetHighestScoreDirection();
 		var directionToMove = bestDirectionsToMove.First();

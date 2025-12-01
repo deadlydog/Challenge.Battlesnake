@@ -2,7 +2,7 @@ using Battlesnake.Domain.GameBoard;
 
 namespace Battlesnake.Domain.MovementStrategies;
 
-public class AvoidSnakeBodiesStrategy : IMovementStrategy
+public class AvoidHittingSnakesStrategy : IMovementStrategy
 {
 	public static readonly int SnakeBodyPenaltyScore = -500;
 	public static readonly int SnakeTailPenaltyScore = -100;
