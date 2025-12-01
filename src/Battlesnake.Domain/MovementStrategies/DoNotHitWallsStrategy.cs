@@ -2,7 +2,7 @@ using Battlesnake.Domain.GameBoard;
 
 namespace Battlesnake.Domain.MovementStrategies;
 
-public class AvoidHittingWallsStrategy : IMovementStrategy
+public class DoNotHitWallsStrategy : IMovementStrategy
 {
 	public static readonly int HitWallScorePenalty = -1000;
 
