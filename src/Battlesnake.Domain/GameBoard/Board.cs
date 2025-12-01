@@ -8,9 +8,9 @@ public class Board
 	public int Width { get; private set; }
 	public int Height { get; private set; }
 
-	public Snake OurSnake { get; private set; }
-	public Coordinate OurSnakeHeadPosition { get; private set; }
-	public Coordinate OurSnakeTailPosition { get; private set; }
+	public Snake OurSnake { get; private set; } = null!;
+	public Coordinate OurSnakeHeadPosition { get; private set; } = null!;
+	public Coordinate OurSnakeTailPosition { get; private set; } = null!;
 
 	public Board(int width, int height)
 	{

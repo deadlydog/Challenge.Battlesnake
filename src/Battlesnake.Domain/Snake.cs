@@ -1,12 +1,12 @@
 namespace Battlesnake.Domain;
 
-public class Snake
+public record Snake
 {
-	public string Id { get; }
+	public string Id { get; init; }
 
-	public int Length { get; }
+	public int Length { get; init; }
 
-	public int Health { get; }
+	public int Health { get; init; }
 
 	public Snake(string id, int length, int health)
 	{
