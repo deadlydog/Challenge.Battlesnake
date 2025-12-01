@@ -2,6 +2,8 @@ namespace Battlesnake.Domain;
 
 public record GameSettings
 {
+	public string GameId { get; init; }
+
 	/// <summary>
 	/// Name of the ruleset being used to run this game.
 	/// Possible values include: standard, solo, royale, squad, constrictor, wrapped.
