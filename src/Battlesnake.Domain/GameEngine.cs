@@ -26,7 +26,7 @@ public static class GameEngine
 			directionToMove = bestDirectionsToMove.ElementAt(new Random().Next(0, bestDirectionsToMove.Count()));
 		}
 
-		logger.LogInformation(
+		logger.LogDebug(
 			"Turn {Round}. Chosen Direction: {Direction}{NewLine}" +
 			"Final Scores: {DirectionScores}{NewLine}" +
 			"Wall scores: {WallScores}{NewLine}" +
