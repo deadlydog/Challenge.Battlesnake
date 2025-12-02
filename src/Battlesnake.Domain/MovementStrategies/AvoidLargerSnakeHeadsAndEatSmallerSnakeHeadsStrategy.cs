@@ -9,8 +9,8 @@ namespace Battlesnake.Domain.MovementStrategies;
 /// </summary>
 public class AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy : IMovementStrategy
 {
-	public static readonly int AdjacentLargerSnakeHeadPenalty = -3000; // High penalty to avoid death, but smaller penaly than guaranteed death of hitting a wall or snake body.
-	public static readonly int AdjacentSmallerSnakeHeadBonus = 2000; // Bonus to encourage headbutting smaller snakes.
+	public static readonly int AvoidAdjacentLargerSnakeHeadScorePenalty = -3000; // High penalty to avoid death, but smaller penaly than guaranteed death of hitting a wall or snake body.
+	public static readonly int AttackAdjacentSmallerSnakeHeadScoreBonus = 2000; // Bonus to encourage headbutting smaller snakes.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{
@@ -57,12 +57,12 @@ public class AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy : IMovementStr
 					if (snake.Length >= board.OurSnake.Length)
 					{
 						// Larger or equal-sized snake head nearby - penalize this move.
-						directionScores.AddScore(playerPotentialCell.Direction, AdjacentLargerSnakeHeadPenalty);
+						directionScores.AddScore(playerPotentialCell.Direction, AvoidAdjacentLargerSnakeHeadScorePenalty);
 					}
 					else
 					{
 						// Smaller snake head nearby - encourage headbutting it.
-						directionScores.AddScore(playerPotentialCell.Direction, AdjacentSmallerSnakeHeadBonus);
+						directionScores.AddScore(playerPotentialCell.Direction, AttackAdjacentSmallerSnakeHeadScoreBonus);
 					}
 				}
 			}

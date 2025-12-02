@@ -8,8 +8,8 @@ namespace Battlesnake.Domain.MovementStrategies;
 /// </summary>
 public class DoNotHitSnakesStrategy : IMovementStrategy
 {
-	public static readonly int HitSnakeBodyScorePenalty = -5000; // Guaranteed death, so a high penalty.
-	public static readonly int HitSnakeTailScorePenalty = -1000; // Lower penalty for tails since they will likely move, unless the snake eats food on next turn.
+	public static readonly int AvoidHittingSnakeBodyScorePenalty = -5000; // Guaranteed death, so a high penalty.
+	public static readonly int AvoidHittingSnakeTailScorePenalty = -1000; // Lower penalty for tails since they will likely move, unless the snake eats food on next turn.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{
@@ -26,15 +26,15 @@ public class DoNotHitSnakesStrategy : IMovementStrategy
 					// If the other snake is only 1 cell long, it's probably likely it will be gone next turn, unless it eats food.
 					if (cellAbove.OccupyingSnake != null && cellAbove.OccupyingSnake.Length > 1)
 					{
-						directionScores.AddScore(MoveDirections.Up, HitSnakeBodyScorePenalty);
+						directionScores.AddScore(MoveDirections.Up, AvoidHittingSnakeBodyScorePenalty);
 					}
 					else
 					{
-						directionScores.AddScore(MoveDirections.Up, HitSnakeTailScorePenalty);
+						directionScores.AddScore(MoveDirections.Up, AvoidHittingSnakeTailScorePenalty);
 					}
 					break;
-				case BoardCellContent.SnakeBody: directionScores.AddScore(MoveDirections.Up, HitSnakeBodyScorePenalty); break;
-				case BoardCellContent.SnakeTail: directionScores.AddScore(MoveDirections.Up, HitSnakeTailScorePenalty); break;
+				case BoardCellContent.SnakeBody: directionScores.AddScore(MoveDirections.Up, AvoidHittingSnakeBodyScorePenalty); break;
+				case BoardCellContent.SnakeTail: directionScores.AddScore(MoveDirections.Up, AvoidHittingSnakeTailScorePenalty); break;
 			}
 		}
 
@@ -48,15 +48,15 @@ public class DoNotHitSnakesStrategy : IMovementStrategy
 					// If the other snake is only 1 cell long, it's probably likely it will be gone next turn, unless it eats food.
 					if (cellBelow.OccupyingSnake != null && cellBelow.OccupyingSnake.Length > 1)
 					{
-						directionScores.AddScore(MoveDirections.Down, HitSnakeBodyScorePenalty);
+						directionScores.AddScore(MoveDirections.Down, AvoidHittingSnakeBodyScorePenalty);
 					}
 					else
 					{
-						directionScores.AddScore(MoveDirections.Down, HitSnakeTailScorePenalty);
+						directionScores.AddScore(MoveDirections.Down, AvoidHittingSnakeTailScorePenalty);
 					}
 					break;
-				case BoardCellContent.SnakeBody: directionScores.AddScore(MoveDirections.Down, HitSnakeBodyScorePenalty); break;
-				case BoardCellContent.SnakeTail: directionScores.AddScore(MoveDirections.Down, HitSnakeTailScorePenalty); break;
+				case BoardCellContent.SnakeBody: directionScores.AddScore(MoveDirections.Down, AvoidHittingSnakeBodyScorePenalty); break;
+				case BoardCellContent.SnakeTail: directionScores.AddScore(MoveDirections.Down, AvoidHittingSnakeTailScorePenalty); break;
 			}
 		}
 
@@ -70,15 +70,15 @@ public class DoNotHitSnakesStrategy : IMovementStrategy
 					// If the other snake is only 1 cell long, it's probably likely it will be gone next turn, unless it eats food.
 					if (cellLeft.OccupyingSnake != null && cellLeft.OccupyingSnake.Length > 1)
 					{
-						directionScores.AddScore(MoveDirections.Left, HitSnakeBodyScorePenalty);
+						directionScores.AddScore(MoveDirections.Left, AvoidHittingSnakeBodyScorePenalty);
 					}
 					else
 					{
-						directionScores.AddScore(MoveDirections.Left, HitSnakeTailScorePenalty);
+						directionScores.AddScore(MoveDirections.Left, AvoidHittingSnakeTailScorePenalty);
 					}
 					break;
-				case BoardCellContent.SnakeBody: directionScores.AddScore(MoveDirections.Left, HitSnakeBodyScorePenalty); break;
-				case BoardCellContent.SnakeTail: directionScores.AddScore(MoveDirections.Left, HitSnakeTailScorePenalty); break;
+				case BoardCellContent.SnakeBody: directionScores.AddScore(MoveDirections.Left, AvoidHittingSnakeBodyScorePenalty); break;
+				case BoardCellContent.SnakeTail: directionScores.AddScore(MoveDirections.Left, AvoidHittingSnakeTailScorePenalty); break;
 			}
 		}
 
@@ -92,15 +92,15 @@ public class DoNotHitSnakesStrategy : IMovementStrategy
 					// If the other snake is only 1 cell long, it's probably likely it will be gone next turn, unless it eats food.
 					if (cellRight.OccupyingSnake != null && cellRight.OccupyingSnake.Length > 1)
 					{
-						directionScores.AddScore(MoveDirections.Right, HitSnakeBodyScorePenalty);
+						directionScores.AddScore(MoveDirections.Right, AvoidHittingSnakeBodyScorePenalty);
 					}
 					else
 					{
-						directionScores.AddScore(MoveDirections.Right, HitSnakeTailScorePenalty);
+						directionScores.AddScore(MoveDirections.Right, AvoidHittingSnakeTailScorePenalty);
 					}
 					break;
-				case BoardCellContent.SnakeBody: directionScores.AddScore(MoveDirections.Right, HitSnakeBodyScorePenalty); break;
-				case BoardCellContent.SnakeTail: directionScores.AddScore(MoveDirections.Right, HitSnakeTailScorePenalty); break;
+				case BoardCellContent.SnakeBody: directionScores.AddScore(MoveDirections.Right, AvoidHittingSnakeBodyScorePenalty); break;
+				case BoardCellContent.SnakeTail: directionScores.AddScore(MoveDirections.Right, AvoidHittingSnakeTailScorePenalty); break;
 			}
 		}
 

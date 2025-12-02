@@ -29,7 +29,7 @@ public class AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategyTests
 		var directionScores = AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Down.ShouldBe(AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.AdjacentLargerSnakeHeadPenalty);
+		directionScores.Down.ShouldBe(AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.AvoidAdjacentLargerSnakeHeadScorePenalty);
 		directionScores.Up.ShouldBe(0);
 		directionScores.Left.ShouldBe(0);
 		directionScores.Right.ShouldBe(0);
@@ -58,7 +58,7 @@ public class AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategyTests
 		var directionScores = AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Right.ShouldBe(AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.AdjacentSmallerSnakeHeadBonus);
+		directionScores.Right.ShouldBe(AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.AttackAdjacentSmallerSnakeHeadScoreBonus);
 		directionScores.Up.ShouldBe(0);
 		directionScores.Down.ShouldBe(0);
 		directionScores.Left.ShouldBe(0);
@@ -86,7 +86,7 @@ public class AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategyTests
 		var directionScores = AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Left.ShouldBe(AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.AdjacentLargerSnakeHeadPenalty);
+		directionScores.Left.ShouldBe(AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.AvoidAdjacentLargerSnakeHeadScorePenalty);
 		directionScores.Up.ShouldBe(0);
 		directionScores.Down.ShouldBe(0);
 		directionScores.Right.ShouldBe(0);
@@ -130,9 +130,9 @@ public class AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategyTests
 		var directionScores = AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Down.ShouldBe(AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.AdjacentLargerSnakeHeadPenalty);
-		directionScores.Right.ShouldBe(AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.AdjacentSmallerSnakeHeadBonus);
-		directionScores.Left.ShouldBe(AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.AdjacentLargerSnakeHeadPenalty);
+		directionScores.Down.ShouldBe(AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.AvoidAdjacentLargerSnakeHeadScorePenalty);
+		directionScores.Right.ShouldBe(AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.AttackAdjacentSmallerSnakeHeadScoreBonus);
+		directionScores.Left.ShouldBe(AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.AvoidAdjacentLargerSnakeHeadScorePenalty);
 		directionScores.Up.ShouldBe(0);
 	}
 

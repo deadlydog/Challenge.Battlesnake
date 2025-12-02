@@ -7,7 +7,7 @@ namespace Battlesnake.Domain.MovementStrategies;
 /// </summary>
 public class DoNotHitWallsStrategy : IMovementStrategy
 {
-	public static readonly int HitWallScorePenalty = -10000; // Guaranteed death, so a high penalty.
+	public static readonly int AvoidHittingWallScorePenalty = -10000; // Guaranteed death, so a high penalty.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{
@@ -16,13 +16,13 @@ public class DoNotHitWallsStrategy : IMovementStrategy
 
 		// Avoid walls by penalizing moves that would hit the wall
 		if (head.Y == 0)
-			directionScores.AddScore(MoveDirections.Down, HitWallScorePenalty); // Wall at bottom
+			directionScores.AddScore(MoveDirections.Down, AvoidHittingWallScorePenalty); // Wall at bottom
 		if (head.Y == board.Height - 1)
-			directionScores.AddScore(MoveDirections.Up, HitWallScorePenalty); // Wall at top
+			directionScores.AddScore(MoveDirections.Up, AvoidHittingWallScorePenalty); // Wall at top
 		if (head.X == 0)
-			directionScores.AddScore(MoveDirections.Left, HitWallScorePenalty); // Wall at left
+			directionScores.AddScore(MoveDirections.Left, AvoidHittingWallScorePenalty); // Wall at left
 		if (head.X == board.Width - 1)
-			directionScores.AddScore(MoveDirections.Right, HitWallScorePenalty); // Wall at right
+			directionScores.AddScore(MoveDirections.Right, AvoidHittingWallScorePenalty); // Wall at right
 		return directionScores;
 	}
 }
