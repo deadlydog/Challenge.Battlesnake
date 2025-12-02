@@ -15,7 +15,8 @@ public static class GameEngine
 		var eatFoodScores = EatCloseFoodStrategy.CalculateDirectionScores(board);
 		var findFoodScores = MoveTowardsFoodStrategy.CalculateDirectionScores(board);
 		var avoidAndEatSnakeHeadsScores = AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.CalculateDirectionScores(board);
-		directionScores = wallScores + snakeScores + eatFoodScores + findFoodScores + avoidAndEatSnakeHeadsScores;
+		var avoidHazardsScores = AvoidHazardsStrategy.CalculateDirectionScores(board);
+		directionScores = wallScores + snakeScores + eatFoodScores + findFoodScores + avoidAndEatSnakeHeadsScores + avoidHazardsScores;
 
 		var bestDirectionsToMove = directionScores.GetHighestScoreDirection();
 		var directionToMove = bestDirectionsToMove.First();
@@ -33,14 +34,16 @@ public static class GameEngine
 			"Snake scores: {SnakeScores}{NewLine}" +
 			"Eat Food scores: {EatFoodScores}{NewLine}" +
 			"Find Food scores: {FindFoodScores}{NewLine}" +
-			"Avoid and Eat Snake Heads scores: {AvoidAndEatSnakeHeadsScores}",
+			"Avoid and Eat Snake Heads scores: {AvoidAndEatSnakeHeadsScores}{NewLine}" +
+			"Avoid Hazards scores: {AvoidHazardsScores}",
 			round, directionToMove, Environment.NewLine,
 			directionScores, Environment.NewLine,
 			wallScores, Environment.NewLine,
 			snakeScores, Environment.NewLine,
 			eatFoodScores, Environment.NewLine,
 			findFoodScores, Environment.NewLine,
-			avoidAndEatSnakeHeadsScores
+			avoidAndEatSnakeHeadsScores, Environment.NewLine,
+			avoidHazardsScores
 		);
 
 		return new TurnDecision
