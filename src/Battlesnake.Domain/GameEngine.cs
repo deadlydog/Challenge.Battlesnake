@@ -13,7 +13,8 @@ public static class GameEngine
 		var snakeScores = DoNotHitSnakesStrategy.CalculateDirectionScores(board);
 		var eatFoodScores = EatCloseFoodStrategy.CalculateDirectionScores(board);
 		var findFoodScores = MoveTowardsFoodStrategy.CalculateDirectionScores(board);
-		directionScores = wallScores + snakeScores + eatFoodScores + findFoodScores;
+		var avoidAndEatSnakeHeadsScores = AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy.CalculateDirectionScores(board);
+		directionScores = wallScores + snakeScores + eatFoodScores + findFoodScores + avoidAndEatSnakeHeadsScores;
 
 		var bestDirectionsToMove = directionScores.GetHighestScoreDirection();
 		var directionToMove = bestDirectionsToMove.First();
