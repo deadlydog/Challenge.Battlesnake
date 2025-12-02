@@ -1,11 +1,12 @@
 using Battlesnake.Domain.GameBoard;
 using Battlesnake.Domain.MovementStrategies;
+using Microsoft.Extensions.Logging;
 
 namespace Battlesnake.Domain;
 
 public static class GameEngine
 {
-	public static TurnDecision MakeMove(GameSettings gameSettings, Board board, int round)
+	public static TurnDecision MakeMove(ILogger logger, GameSettings gameSettings, Board board, int round)
 	{
 		var directionScores = new DirectionScores();
 
@@ -25,13 +26,22 @@ public static class GameEngine
 			directionToMove = bestDirectionsToMove.ElementAt(new Random().Next(0, bestDirectionsToMove.Count()));
 		}
 
-		Console.WriteLine($"Turn {round}. Chosen Direction: {directionToMove}{Environment.NewLine}" +
-			$"Final Scores: {directionScores}{Environment.NewLine}" +
-			$"Wall scores: {wallScores}{Environment.NewLine}" +
-			$"Snake scores: {snakeScores}{Environment.NewLine}" +
-			$"Eat Food scores: {eatFoodScores}{Environment.NewLine}" +
-			$"Find Food scores: {findFoodScores}{Environment.NewLine}" +
-			$"Avoid and Eat Snake Heads scores: {avoidAndEatSnakeHeadsScores}{Environment.NewLine}");
+		logger.LogInformation(
+			"Turn {Round}. Chosen Direction: {Direction}{NewLine}" +
+			"Final Scores: {DirectionScores}{NewLine}" +
+			"Wall scores: {WallScores}{NewLine}" +
+			"Snake scores: {SnakeScores}{NewLine}" +
+			"Eat Food scores: {EatFoodScores}{NewLine}" +
+			"Find Food scores: {FindFoodScores}{NewLine}" +
+			"Avoid and Eat Snake Heads scores: {AvoidAndEatSnakeHeadsScores}",
+			round, directionToMove, Environment.NewLine,
+			directionScores, Environment.NewLine,
+			wallScores, Environment.NewLine,
+			snakeScores, Environment.NewLine,
+			eatFoodScores, Environment.NewLine,
+			findFoodScores, Environment.NewLine,
+			avoidAndEatSnakeHeadsScores
+		);
 
 		return new TurnDecision
 		{

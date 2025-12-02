@@ -30,7 +30,8 @@ app.MapGet("/", () =>
 /// </summary>
 app.MapPost("/start", (GameStatusRequest gameStatusRequest) =>
 {
-    Results.Ok();
+	app.Logger.LogInformation($"Game {gameStatusRequest.Game.Id} started.");
+	Results.Ok();
 });
 
 /// <summary>
@@ -42,7 +43,9 @@ app.MapPost("/move", (GameStatusRequest gameStatusRequest) =>
 {
 	var board = ApiBoardToDomainBoardAdapter.Convert(gameStatusRequest.Board, gameStatusRequest.You.Id);
 	var gameSettings = ApiGameToDomainGameSettingsAdapter.Convert(gameStatusRequest.Game);
-	var decision = GameEngine.MakeMove(gameSettings, board, gameStatusRequest.Turn);
+	var decision = GameEngine.MakeMove(app.Logger, gameSettings, board, gameStatusRequest.Turn);
+
+	app.Logger.LogInformation($"Turn {gameStatusRequest.Turn}. Chosen Direction: {decision.MoveDirection}");
 
 	return new MoveResponse
     {
@@ -58,7 +61,8 @@ app.MapPost("/move", (GameStatusRequest gameStatusRequest) =>
 /// </summary>
 app.MapPost("/end", (GameStatusRequest gameStatusRequest) =>
 {
-    Results.Ok();
+	app.Logger.LogInformation($"Game {gameStatusRequest.Game.Id} ended.");
+	Results.Ok();
 });
 
 app.Run();
