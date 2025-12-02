@@ -3,6 +3,10 @@ using System.Numerics;
 
 namespace Battlesnake.Domain.MovementStrategies;
 
+/// <summary>
+/// This strategy awards higher scores to moves that bring the snake closer to food items on the board.
+/// The closer the food is to the head, the higher the score awarded to moves in that direction.
+/// </summary>
 public class MoveTowardsFoodStrategy : IMovementStrategy
 {
 	public static readonly int FoodProximityMultiplier = 50;

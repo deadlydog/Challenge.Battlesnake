@@ -2,6 +2,9 @@ using Battlesnake.Domain.GameBoard;
 
 namespace Battlesnake.Domain.MovementStrategies;
 
+/// <summary>
+/// This strategy awards a high score to moves that result in eating food on the next turn (i.e. food that is directly adjacent to the snake's head).
+/// </summary>
 public class EatCloseFoodStrategy : IMovementStrategy
 {
 	public static readonly int EatFoodScoreBoost = 1000;

@@ -2,9 +2,13 @@ using Battlesnake.Domain.GameBoard;
 
 namespace Battlesnake.Domain.MovementStrategies;
 
+/// <summary>
+/// This strategy penalizes moves that would result in hitting another snake's body or tail.
+/// This does not take into account the possibility of head-to-head collisions; that is handled in a separate strategy.
+/// </summary>
 public class DoNotHitSnakesStrategy : IMovementStrategy
 {
-	public static readonly int HitSnakeBodyScorePenalty = -5000;
+	public static readonly int HitSnakeBodyScorePenalty = -5000; // Guaranteed death, so a high penalty.
 	public static readonly int HitSnakeTailScorePenalty = -1000; // Lower penalty for tails since they will likely move, unless the snake eats food on next turn.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
