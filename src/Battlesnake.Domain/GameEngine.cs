@@ -30,7 +30,8 @@ public static class GameEngine
 			$"Wall scores: {wallScores}{Environment.NewLine}" +
 			$"Snake scores: {snakeScores}{Environment.NewLine}" +
 			$"Eat Food scores: {eatFoodScores}{Environment.NewLine}" +
-			$"Find Food scores: {findFoodScores}{Environment.NewLine}");
+			$"Find Food scores: {findFoodScores}{Environment.NewLine}" +
+			$"Avoid and Eat Snake Heads scores: {avoidAndEatSnakeHeadsScores}{Environment.NewLine}");
 
 		return new TurnDecision
 		{
