@@ -87,30 +87,144 @@ public class DoNotHitSnakesStrategyTests
 	}
 
 	[Fact]
-	public void WhenHeadIsNextToAnotherSnakeBody_ThenScoresAreReducedForMovesTowardsSnakeBody()
+	public void WhenSnakeIsInTopLeftCornerFacingRight_ThenScoresAreReducedForMovesTowardsBody()
 	{
 		// Arrange
 		var board = new Board(11, 11);
 		board.AddSnake("player", 100, new List<Coordinate>
 		{
-			new Coordinate(5, 5), // Head
-			new Coordinate(5, 6), // Player's own body is directly above head
-			new Coordinate(5, 7)
+			new Coordinate(1, 10), // Head near top-left corner
+			new Coordinate(0, 10), // Body to the left of head
+			new Coordinate(0, 9),
+			new Coordinate(0, 8),
+			new Coordinate(0, 7)
 		}, true);
-		board.AddSnake("opponent", 100, new List<Coordinate>
-		{
-			new Coordinate(4, 4),
-			new Coordinate(5, 4), // Opponent's body is directly below player's head
-			new Coordinate(6, 4)
-		}, false);
 
 		// Act
 		var directionScores = DoNotHitSnakesStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Up.ShouldBe(DoNotHitSnakesStrategy.AvoidHittingSnakeBodyScorePenalty); // Reduced score towards own body
-		directionScores.Down.ShouldBe(DoNotHitSnakesStrategy.AvoidHittingSnakeBodyScorePenalty); // Reduced score towards opponent's body
+		directionScores.Up.ShouldBe(0);
+		directionScores.Left.ShouldBe(DoNotHitSnakesStrategy.AvoidHittingSnakeBodyScorePenalty);
+		directionScores.Down.ShouldBe(0);
+		directionScores.Right.ShouldBe(0);
+	}
+
+	[Fact]
+	public void WhenSnakeIsInTopLeftCornerFacingDown_ThenScoresAreReducedForMovesTowardsBody()
+	{
+		// Arrange
+		var board = new Board(11, 11);
+		board.AddSnake("player", 100, new List<Coordinate>
+		{
+			new Coordinate(0, 9), // Head near top-left corner
+			new Coordinate(0, 10), // Body above head
+			new Coordinate(1, 10),
+			new Coordinate(2, 10),
+			new Coordinate(3, 10)
+		}, true);
+
+		// Act
+		var directionScores = DoNotHitSnakesStrategy.CalculateDirectionScores(board);
+
+		// Assert
+		directionScores.Up.ShouldBe(DoNotHitSnakesStrategy.AvoidHittingSnakeBodyScorePenalty);
 		directionScores.Left.ShouldBe(0);
+		directionScores.Down.ShouldBe(0);
+		directionScores.Right.ShouldBe(0);
+	}
+
+	[Fact]
+	public void WhenSnakeIsInBottomLeftCornerFacingRight_ThenScoresAreReducedForMovesTowardsBody()
+	{
+		// Arrange
+		var board = new Board(11, 11);
+		board.AddSnake("player", 100, new List<Coordinate>
+		{
+			new Coordinate(1, 0), // Head near bottom-left corner
+			new Coordinate(0, 0), // Body to the left of head
+			new Coordinate(0, 1),
+			new Coordinate(0, 2),
+			new Coordinate(0, 3)
+		}, true);
+
+		// Act
+		var directionScores = DoNotHitSnakesStrategy.CalculateDirectionScores(board);
+
+		// Assert
+		directionScores.Up.ShouldBe(0);
+		directionScores.Left.ShouldBe(DoNotHitSnakesStrategy.AvoidHittingSnakeBodyScorePenalty);
+		directionScores.Down.ShouldBe(0);
+		directionScores.Right.ShouldBe(0);
+	}
+
+	[Fact]
+	public void WhenSnakeIsInBottomLeftCornerFacingUp_ThenScoresAreReducedForMovesTowardsBody()
+	{
+		// Arrange
+		var board = new Board(11, 11);
+		board.AddSnake("player", 100, new List<Coordinate>
+		{
+			new Coordinate(0, 1), // Head near bottom-left corner
+			new Coordinate(0, 0), // Body below head
+			new Coordinate(1, 0),
+			new Coordinate(2, 0),
+			new Coordinate(3, 0)
+		}, true);
+
+		// Act
+		var directionScores = DoNotHitSnakesStrategy.CalculateDirectionScores(board);
+
+		// Assert
+		directionScores.Up.ShouldBe(0);
+		directionScores.Left.ShouldBe(0);
+		directionScores.Down.ShouldBe(DoNotHitSnakesStrategy.AvoidHittingSnakeBodyScorePenalty);
+		directionScores.Right.ShouldBe(0);
+	}
+
+	[Fact]
+	public void WhenSnakeIsInBottomRightCornerFacingLeft_ThenScoresAreReducedForMovesTowardsBody()
+	{
+		// Arrange
+		var board = new Board(11, 11);
+		board.AddSnake("player", 100, new List<Coordinate>
+		{
+			new Coordinate(9, 0), // Head near bottom-right corner
+			new Coordinate(10, 0), // Body to the right of head
+			new Coordinate(10, 1),
+			new Coordinate(10, 2),
+			new Coordinate(10, 3)
+		}, true);
+
+		// Act
+		var directionScores = DoNotHitSnakesStrategy.CalculateDirectionScores(board);
+
+		// Assert
+		directionScores.Up.ShouldBe(0);
+		directionScores.Left.ShouldBe(0);
+		directionScores.Down.ShouldBe(0);
+		directionScores.Right.ShouldBe(DoNotHitSnakesStrategy.AvoidHittingSnakeBodyScorePenalty);
+	}
+
+	[Fact]
+	public void WhenSnakeIsInBottomRightCornerFacingUp_ThenScoresAreReducedForMovesTowardsBody()
+	{
+		// Arrange
+		var board = new Board(11, 11);
+		board.AddSnake("player", 100, new List<Coordinate>
+		{
+			new Coordinate(10, 1), // Head near bottom-right corner
+			new Coordinate(10, 0), // Body below head
+			new Coordinate(9, 0),
+			new Coordinate(8, 0),
+			new Coordinate(7, 0)
+		}, true);
+		// Act
+		var directionScores = DoNotHitSnakesStrategy.CalculateDirectionScores(board);
+		// Assert
+		directionScores.Up.ShouldBe(0);
+		directionScores.Left.ShouldBe(0);
+		directionScores.Down.ShouldBe(DoNotHitSnakesStrategy.AvoidHittingSnakeBodyScorePenalty);
 		directionScores.Right.ShouldBe(0);
 	}
 
