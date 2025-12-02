@@ -5,7 +5,6 @@ namespace Battlesnake.Domain.GameBoard;
 public class Board
 {
 	private readonly BoardCell[,] _cells;
-	private readonly List<Snake> _snakes = new List<Snake>();
 
 	public int Width { get; private set; }
 	public int Height { get; private set; }
@@ -14,10 +13,13 @@ public class Board
 	public Coordinate OurSnakeHeadPosition { get; private set; } = null!;
 	public Coordinate OurSnakeTailPosition { get; private set; } = null!;
 
-	private List<Coordinate> _foodCells = new List<Coordinate>();
+	private readonly List<Snake> _snakes = new List<Snake>();
+	public IReadOnlyList<Snake> Snakes => _snakes.AsReadOnly();
+
+	private readonly List<Coordinate> _foodCells = new List<Coordinate>();
 	public IReadOnlyList<Coordinate> FoodCells => _foodCells.AsReadOnly();
 
-	private List<Coordinate> _hazardCells = new List<Coordinate>();
+	private readonly List<Coordinate> _hazardCells = new List<Coordinate>();
 	public IReadOnlyList<Coordinate> HazardCells => _hazardCells.AsReadOnly();
 
 	public Board(int width, int height)
