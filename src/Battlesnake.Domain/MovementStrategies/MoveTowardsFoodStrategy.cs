@@ -13,7 +13,7 @@ namespace Battlesnake.Domain.MovementStrategies;
 public class MoveTowardsFoodStrategy : IMovementStrategy
 {
 	public static readonly int FoodProximityAttractionMaxMultiplier = 50; // Used to make closer food more attractive. Max attraction per food is 10 * multiplier.
-	public static readonly int MaxCloseFoodToBeAttractedTo = 5; // Only the closest food will affect attraction. Closer food is given more weight. // Used to make closer food more attractive.
+	public static readonly int MaxCloseFoodToBeAttractedTo = 5; // Only the closest food will affect attraction. Closer food is given more weight.
 	public static readonly int StopFoodAttractionWhenPlayerSnakeIsLargerThanOtherLargestSnakeBy = 3; // If our snake is much larger than the others, we don't need to seek food.
 	public static readonly int ForceFoodAttractionWhenPlayerHealthIsBelow = 50; // If our health is low, we should seek food regardless of size advantage.
 

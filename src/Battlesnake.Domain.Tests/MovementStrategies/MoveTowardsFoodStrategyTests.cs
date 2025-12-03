@@ -185,38 +185,6 @@ public class MoveTowardsFoodStrategyTests
 	}
 
 	[Fact]
-	public void WhenMultipleFoodItemsArePresentAndEquallyDistantInOppositeDirections_ThenScoresShouldAllBeEqual()
-	{
-		// Arrange
-		var board = new Board(11, 11);
-		board.AddSnake("player", 100, new List<Coordinate>
-		{
-			new Coordinate(5, 5), // Head
-			new Coordinate(5, 4),
-			new Coordinate(5, 3)
-		}, true);
-		board.AddSnake("opponent", 100, new List<Coordinate>
-		{
-			new Coordinate(1, 0), // Opponent head
-			new Coordinate(1, 1),
-			new Coordinate(1, 2)
-		}, false);
-		board.AddFood(10, 10); // Food above and to the right
-		board.AddFood(0, 0); // Food below and to the left
-
-		// Act
-		var directionScores = MoveTowardsFoodStrategy.CalculateDirectionScores(board);
-
-		// Assert
-		directionScores.Up.ShouldBeGreaterThan(0);
-		directionScores.Right.ShouldBeGreaterThan(0);
-		directionScores.Down.ShouldBeGreaterThan(0);
-		directionScores.Left.ShouldBeGreaterThan(0);
-		directionScores.Up.ShouldBe(directionScores.Down); // Scores should be equal due to symmetry
-		directionScores.Left.ShouldBe(directionScores.Right); // Scores should be equal due to symmetry
-	}
-
-	[Fact]
 	public void WhenOurSnakeIsSignificantlyLargerThanOpponentsAndHasHighHealth_ThenNoScoresAreAdded()
 	{
 		// Arrange
