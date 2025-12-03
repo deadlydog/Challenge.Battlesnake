@@ -14,7 +14,8 @@ public class Board
 	public Coordinate OurSnakeTailPosition { get; private set; } = null!;
 
 	private readonly List<Snake> _snakes = new List<Snake>();
-	public IReadOnlyList<Snake> Snakes => _snakes.AsReadOnly();
+	public IReadOnlyList<Snake> AllSnakes => _snakes.AsReadOnly();
+	public IReadOnlyList<Snake> OpponentSnakes => _snakes.Where(s => s.Id != OurSnake.Id).ToList().AsReadOnly();
 
 	private readonly List<Coordinate> _foodCells = new List<Coordinate>();
 	public IReadOnlyList<Coordinate> FoodCells => _foodCells.AsReadOnly();

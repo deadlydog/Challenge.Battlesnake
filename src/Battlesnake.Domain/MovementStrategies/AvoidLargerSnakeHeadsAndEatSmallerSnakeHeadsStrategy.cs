@@ -31,18 +31,14 @@ public class AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy : IMovementStr
 			entry.Coordinate.Y >= 0 && entry.Coordinate.Y < (board.Height - 1));
 
 		// See if any other snakes can move into the same cells that the player can, and adjust scores accordingly.
-		foreach (var snake in board.Snakes)
+		foreach (var opponentSnake in board.OpponentSnakes)
 		{
-			// Skip our own snake.
-			if (snake.Id == board.OurSnake.Id)
-				continue;
-
 			var cellsAroundOtherSnakeHead = new[]
 			{
-				new Coordinate(snake.Head.X, snake.Head.Y + 1),
-				new Coordinate(snake.Head.X, snake.Head.Y - 1),
-				new Coordinate(snake.Head.X - 1, snake.Head.Y),
-				new Coordinate(snake.Head.X + 1, snake.Head.Y)
+				new Coordinate(opponentSnake.Head.X, opponentSnake.Head.Y + 1),
+				new Coordinate(opponentSnake.Head.X, opponentSnake.Head.Y - 1),
+				new Coordinate(opponentSnake.Head.X - 1, opponentSnake.Head.Y),
+				new Coordinate(opponentSnake.Head.X + 1, opponentSnake.Head.Y)
 			};
 
 			// Only consider cells that are actually on the board.
@@ -54,7 +50,7 @@ public class AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy : IMovementStr
 			{
 				if (cellsOtherSnakeCanMoveTo.Any(otherSnakePotenialCell => otherSnakePotenialCell == playerPotentialCell.Coordinate))
 				{
-					if (snake.Length >= board.OurSnake.Length)
+					if (opponentSnake.Length >= board.OurSnake.Length)
 					{
 						// Larger or equal-sized snake head nearby - penalize this move.
 						directionScores.AddScore(playerPotentialCell.Direction, AvoidAdjacentLargerSnakeHeadScorePenalty);
