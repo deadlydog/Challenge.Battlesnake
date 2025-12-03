@@ -6,7 +6,7 @@ namespace Battlesnake.Domain.MovementStrategies;
 public class AvoidEnclosedSpacesStrategy : IMovementStrategy
 {
 	public const int AvoidCompletelyEnclosedSpaceScorePenalty = -3000; // High penalty to avoid death, as you would be trapped.
-	public const int AvoidMostlyEnclosedSpaceScorePenalty = -1500; // Penalty to avoid potentially getting trapped, but less than hitting a wall or snake body as you could live longer.
+	public const int AvoidMostlyEnclosedSpaceScorePenalty = -1200; // Penalty to avoid potentially getting trapped, but less than hitting a wall or snake body as you could live longer.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{
