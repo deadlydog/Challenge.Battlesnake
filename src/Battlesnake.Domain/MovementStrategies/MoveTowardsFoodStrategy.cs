@@ -10,6 +10,8 @@ namespace Battlesnake.Domain.MovementStrategies;
 public class MoveTowardsFoodStrategy : IMovementStrategy
 {
 	// TODO: Should be dynamic based on board size so it doesn't give crazy high scores on larger boards.
+	// Scale delta distance instead of multiplier.
+	// Also, only consider 4 closest food to prevent score inflation, or maybe divide score by number of food considered....
 	public static readonly int FoodProximityAttractionMultiplier = 50; // Used to make closer food more attractive.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
@@ -24,7 +26,7 @@ public class MoveTowardsFoodStrategy : IMovementStrategy
 			// The closer the player is to the cell, the more inticing it should be.
 			int xScore = (board.Width - Math.Abs(xDelta)) * FoodProximityAttractionMultiplier;
 			int yScore = (board.Height - Math.Abs(yDelta)) * FoodProximityAttractionMultiplier;
-			
+
 			if (xDelta > 0)
 			{
 				directionScores.AddScore(MoveDirections.Left, xScore);
