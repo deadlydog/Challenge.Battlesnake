@@ -31,8 +31,8 @@ public class MoveTowardsFoodStrategy : IMovementStrategy
 		int foodOrder = 0;
 		foreach (var food in closestFood)
 		{
+			float foodOrderPriorityScaler = Math.Max(1f - (foodOrder * 0.2f), 0.1f); // Closer food has more influence.
 			foodOrder++;
-			float foodOrderPriorityScaler = 1f / foodOrder; // Closer food has more influence.
 
 			int xDelta = board.OurSnakeHeadPosition.X - food.X;
 			int yDelta = board.OurSnakeHeadPosition.Y - food.Y;
