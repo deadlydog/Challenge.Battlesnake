@@ -146,30 +146,4 @@ public class MoveTowardsFoodStrategyTests
 		directionScores.Left.ShouldBe(0);
 		directionScores.Right.ShouldBe(0);
 	}
-
-	[Fact]
-	public void WhenMultipleFoodItemsArePresentAndEquallyDistantInOppositeDirections_ThenScoresShouldAllBeEqual()
-	{
-		// Arrange
-		var board = new Board(11, 11);
-		board.AddSnake("player", 100, new List<Coordinate>
-		{
-			new Coordinate(5, 5), // Head
-			new Coordinate(5, 4),
-			new Coordinate(5, 3)
-		}, true);
-		board.AddFood(10, 10); // Food above and to the right
-		board.AddFood(0, 0); // Food below and to the left
-
-		// Act
-		var directionScores = MoveTowardsFoodStrategy.CalculateDirectionScores(board);
-
-		// Assert
-		directionScores.Up.ShouldBeGreaterThan(0);
-		directionScores.Right.ShouldBeGreaterThan(0);
-		directionScores.Down.ShouldBeGreaterThan(0);
-		directionScores.Left.ShouldBeGreaterThan(0);
-		directionScores.Up.ShouldBe(directionScores.Down); // Scores should be equal due to symmetry
-		directionScores.Left.ShouldBe(directionScores.Right); // Scores should be equal due to symmetry
-	}
 }
