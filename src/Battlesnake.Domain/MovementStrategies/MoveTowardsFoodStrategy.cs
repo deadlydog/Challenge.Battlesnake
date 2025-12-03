@@ -9,7 +9,8 @@ namespace Battlesnake.Domain.MovementStrategies;
 /// </summary>
 public class MoveTowardsFoodStrategy : IMovementStrategy
 {
-	public static readonly int FoodProximityAttractionMultiplier = 50;
+	// TODO: Should be dynamic based on board size so it doesn't give crazy high scores on larger boards.
+	public static readonly int FoodProximityAttractionMultiplier = 50; // Used to make closer food more attractive.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{
