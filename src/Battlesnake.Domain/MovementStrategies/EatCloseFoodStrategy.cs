@@ -15,7 +15,7 @@ public class EatCloseFoodStrategy : IMovementStrategy
 		var playerHead = board.OurSnakeHeadPosition;
 
 		// If the Player's snake is able to move up.
-		if (playerHead.Y < (board.Height - 2))
+		if (playerHead.Y < (board.Height - 1))
 		{
 			var cellAbove = board.GetCell(playerHead.X, playerHead.Y + 1);
 			switch (cellAbove.Content)
@@ -45,7 +45,7 @@ public class EatCloseFoodStrategy : IMovementStrategy
 		}
 
 		// If the Player's snake is able to move right.
-		if (playerHead.X < (board.Width - 2))
+		if (playerHead.X < (board.Width - 1))
 		{
 			var cellRight = board.GetCell(playerHead.X + 1, playerHead.Y);
 			switch (cellRight.Content)
