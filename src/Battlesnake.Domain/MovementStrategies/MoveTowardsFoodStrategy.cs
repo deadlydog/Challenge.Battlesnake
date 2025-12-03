@@ -10,7 +10,8 @@ namespace Battlesnake.Domain.MovementStrategies;
 /// </summary>
 public class MoveTowardsFoodStrategy : IMovementStrategy
 {
-	public static readonly int FoodProximityAttractionMultiplier = 50; // Used to make closer food more attractive. Max attraction per food is 10 * multiplier.
+	public static readonly int FoodProximityAttractionMaxMultiplier = 50; // Used to make closer food more attractive. Max attraction per food is 10 * multiplier.
+	public static readonly int MaxCloseFoodToBeAttractedTo = 5; // Only the closest food will affect attraction. Closer food is given more weight.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{
@@ -25,10 +26,14 @@ public class MoveTowardsFoodStrategy : IMovementStrategy
 		var playerHead = board.OurSnakeHeadPosition;
 		var closestFood = board.FoodCells
 			.OrderBy(food => playerHead.GetDistanceTo(food))
-			.Take(4); // Consider only the 4 closest food items.
+			.Take(MaxCloseFoodToBeAttractedTo);
 
+		int foodOrder = 0;
 		foreach (var food in closestFood)
 		{
+			foodOrder++;
+			float foodOrderPriorityScaler = 1f / foodOrder; // Closer food has more influence.
+
 			int xDelta = board.OurSnakeHeadPosition.X - food.X;
 			int yDelta = board.OurSnakeHeadPosition.Y - food.Y;
 
@@ -40,9 +45,9 @@ public class MoveTowardsFoodStrategy : IMovementStrategy
 			int xDeltaScaled = (int)(xDeltaInverted * boardSizeScaler);
 			int yDeltaScaled = (int)(yDeltaInverted * boardSizeScaler);
 
-			// Finally, apply the attraction multiplier.
-			int xScore = xDeltaScaled * FoodProximityAttractionMultiplier;
-			int yScore = yDeltaScaled * FoodProximityAttractionMultiplier;
+			// Finally, apply the attraction multiplier, scaled according to how close this food is relative to other food.
+			int xScore = xDeltaScaled * (int)(FoodProximityAttractionMaxMultiplier * foodOrderPriorityScaler);
+			int yScore = yDeltaScaled * (int)(FoodProximityAttractionMaxMultiplier * foodOrderPriorityScaler);
 
 			if (xDelta > 0)
 			{
