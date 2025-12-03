@@ -7,7 +7,7 @@ namespace Battlesnake.Domain.MovementStrategies;
 /// </summary>
 public class DoNotHitWallsStrategy : IMovementStrategy
 {
-	public static readonly int AvoidHittingWallScorePenalty = -10000; // Guaranteed death, so a high penalty.
+	public static readonly int AvoidHittingWallScorePenalty = -10_000; // Guaranteed death, so a high penalty.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{

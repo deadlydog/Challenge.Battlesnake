@@ -9,7 +9,7 @@ namespace Battlesnake.Domain.MovementStrategies;
 /// </summary>
 public class AvoidLargerSnakeHeadsAndEatSmallerSnakeHeadsStrategy : IMovementStrategy
 {
-	public static readonly int AvoidAdjacentLargerSnakeHeadScorePenalty = -3000; // High penalty to avoid death, but smaller penaly than guaranteed death of hitting a wall or snake body.
+	public static readonly int AvoidAdjacentLargerSnakeHeadScorePenalty = -4000; // High penalty to avoid potential death, but smaller penalty than guaranteed death of hitting a wall or snake body.
 	public static readonly int AttackAdjacentSmallerSnakeHeadScoreBonus = 2000; // Bonus to encourage headbutting smaller snakes.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
