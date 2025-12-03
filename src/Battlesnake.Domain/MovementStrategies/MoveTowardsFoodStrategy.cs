@@ -6,12 +6,11 @@ namespace Battlesnake.Domain.MovementStrategies;
 /// <summary>
 /// This strategy awards higher scores to moves that bring the snake closer to food items on the board.
 /// The closer the food is to the head, the higher the score awarded to moves in that direction.
+/// To prevent overwhelming the overall scoring, only the closest few food items are considered.
 /// </summary>
 public class MoveTowardsFoodStrategy : IMovementStrategy
 {
-	// TODO: Should be dynamic based on board size so it doesn't give crazy high scores on larger boards.
-	// Also, only consider 4 closest food to prevent score inflation, or maybe divide score by number of food considered....
-	public static readonly int FoodProximityAttractionMultiplier = 50; // Used to make closer food more attractive.
+	public static readonly int FoodProximityAttractionMultiplier = 50; // Used to make closer food more attractive. Max attraction per food is 10 * multiplier.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{
@@ -22,7 +21,13 @@ public class MoveTowardsFoodStrategy : IMovementStrategy
 		// To compensate, we scale the delta values based on board size.
 		float boardSizeScaler = 11f / Math.Max(board.Width, board.Height);
 
-		foreach (var food in board.FoodCells)
+		// To prevent the food attraction from overloading the overall scores, only consider the closest food items.
+		var playerHead = board.OurSnakeHeadPosition;
+		var closestFood = board.FoodCells
+			.OrderBy(food => playerHead.GetDistanceTo(food))
+			.Take(4); // Consider only the 4 closest food items.
+
+		foreach (var food in closestFood)
 		{
 			int xDelta = board.OurSnakeHeadPosition.X - food.X;
 			int yDelta = board.OurSnakeHeadPosition.Y - food.Y;
