@@ -10,7 +10,6 @@ namespace Battlesnake.Domain.MovementStrategies;
 public class MoveTowardsFoodStrategy : IMovementStrategy
 {
 	// TODO: Should be dynamic based on board size so it doesn't give crazy high scores on larger boards.
-	// Scale delta distance instead of multiplier.
 	// Also, only consider 4 closest food to prevent score inflation, or maybe divide score by number of food considered....
 	public static readonly int FoodProximityAttractionMultiplier = 50; // Used to make closer food more attractive.
 
@@ -18,14 +17,27 @@ public class MoveTowardsFoodStrategy : IMovementStrategy
 	{
 		var directionScores = new DirectionScores();
 
+		// The FoodProximityAttractionMultiplier assumes the default board size of 11x11.
+		// The xDelta and yDelta calculations below can be much higher or lower depending on board size, which affects the scores assigned.
+		// To compensate, we scale the delta values based on board size.
+		float boardSizeScaler = 11f / Math.Max(board.Width, board.Height);
+
 		foreach (var food in board.FoodCells)
 		{
 			int xDelta = board.OurSnakeHeadPosition.X - food.X;
 			int yDelta = board.OurSnakeHeadPosition.Y - food.Y;
 
-			// The closer the player is to the cell, the more inticing it should be.
-			int xScore = (board.Width - Math.Abs(xDelta)) * FoodProximityAttractionMultiplier;
-			int yScore = (board.Height - Math.Abs(yDelta)) * FoodProximityAttractionMultiplier;
+			// The closer the player is to the food, the more inticing it should be, so invert the deltas so that short distances result in larger values.
+			int xDeltaInverted = board.Width - Math.Abs(xDelta);
+			int yDeltaInverted = board.Height - Math.Abs(yDelta);
+
+			// Scale the inverted deltas based on board size. This prevents large boards from generating very high scores, and small boards from generating very low scores.
+			int xDeltaScaled = (int)(xDeltaInverted * boardSizeScaler);
+			int yDeltaScaled = (int)(yDeltaInverted * boardSizeScaler);
+
+			// Finally, apply the attraction multiplier.
+			int xScore = xDeltaScaled * FoodProximityAttractionMultiplier;
+			int yScore = yDeltaScaled * FoodProximityAttractionMultiplier;
 
 			if (xDelta > 0)
 			{

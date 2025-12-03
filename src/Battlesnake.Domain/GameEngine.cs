@@ -28,7 +28,7 @@ public static class GameEngine
 		}
 
 		logger.LogDebug(
-			"Turn {Round}. Chosen Direction: {Direction}. Our Health: {Health}{NewLine}" +
+			"Turn {Round}. Chosen Direction: {Direction}. Our Health: {Health}. Food: {foodCount}. Hazards: {hazardsCount}. Opponents: {otherSnakes}{NewLine}" +
 			"Final Scores: {DirectionScores}{NewLine}" +
 			"Wall scores: {WallScores}{NewLine}" +
 			"Snake scores: {SnakeScores}{NewLine}" +
@@ -36,7 +36,7 @@ public static class GameEngine
 			"Find Food scores: {FindFoodScores}{NewLine}" +
 			"Avoid and Eat Snake Heads scores: {AvoidAndEatSnakeHeadsScores}{NewLine}" +
 			"Avoid Hazards scores: {AvoidHazardsScores}",
-			round, directionToMove, board.OurSnake.Health, Environment.NewLine,
+			round, directionToMove, board.OurSnake.Health, board.FoodCells.Count, board.HazardCells.Count, board.OpponentSnakes.Count, Environment.NewLine,
 			directionScores, Environment.NewLine,
 			wallScores, Environment.NewLine,
 			snakeScores, Environment.NewLine,
