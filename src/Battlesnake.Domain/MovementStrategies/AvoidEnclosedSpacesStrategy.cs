@@ -7,6 +7,7 @@ public class AvoidEnclosedSpacesStrategy : IMovementStrategy
 {
 	public const int AvoidCompletelyEnclosedSpaceScorePenalty = -5000; // Almost guaranteed death on next turn, so high penalty.
 	public const int AvoidMostlyEnclosedSpaceScorePenalty = -1200; // Penalty to avoid potentially getting trapped, but less than hitting a wall or snake body as you could live longer.
+	public const int AvoidSlightlyEnclosedSpaceScorePenalty = -200; // Small penalty to avoid wide open spaces.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{
@@ -25,6 +26,11 @@ public class AvoidEnclosedSpacesStrategy : IMovementStrategy
 		var cellsPlayerCanMoveTo = cellsAroundPlayer.Where(entry =>
 			entry.Coordinate.X >= 0 && entry.Coordinate.X < board.Width &&
 			entry.Coordinate.Y >= 0 && entry.Coordinate.Y < board.Height);
+
+		// Do not bother checking moving the player backward, as it would run into its own body.
+		// The 2nd segment of the snake's body (after the head) is always at index 1.
+		cellsPlayerCanMoveTo = cellsPlayerCanMoveTo.Where(entry =>
+			entry.Coordinate != board.OurSnake.Body.Skip(1).First());
 
 		// See if any of the cells surrounding the move cell are enclosed, and adjust scores accordingly.
 		foreach (var potentialMoveCell in cellsPlayerCanMoveTo)
@@ -67,6 +73,11 @@ public class AvoidEnclosedSpacesStrategy : IMovementStrategy
 			{
 				// This move would result in being mostly enclosed, which could lead to getting trapped, so apply a lesser penalty.
 				directionScores.AddScore(potentialMoveCell.Direction, AvoidMostlyEnclosedSpaceScorePenalty);
+			}
+			else if (numberOfEnclosedSurroundingCells == 2)
+			{
+				// This move would result in being slightly enclosed, which may lead to getting trapped, so apply a small penalty.
+				directionScores.AddScore(potentialMoveCell.Direction, AvoidSlightlyEnclosedSpaceScorePenalty);
 			}
 		}
 
