@@ -41,6 +41,7 @@ From there, let your Battlesnake compete in games and climb the leaderboard!
 
 - Merge in [this PR](https://github.com/deadlydog/Challenge.Battlesnake/pull/1/files) to not have the snake so aggressively chase food.
 - Improve pathfinding to avoid getting trapped or cornered.
+  Checkout the algorithms mentioned [in the docs](https://docs.battlesnake.com/guides/useful-algorithms).
 - Implement more aggressive strategies to block and trap opponent snakes, when not in need of food.
   - e.g. Chase your own tail to kill time when when the board is crowded, allowing other snakes to battle, or to wait for them to get close before cutting them off.
   - e.g. Circle around smaller snakes to trap them against walls or your own body.
