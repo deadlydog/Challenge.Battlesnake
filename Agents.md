@@ -69,4 +69,4 @@ battlesnake play -W 11 -H 11 --name test_snake --url https://localhost:5001/ -g 
 
 ## External Integration
 
-- __Battlesnake API__: v1 spec from https://docs.battlesnake.com/api
+- __Battlesnake API__: v1 spec from <https://docs.battlesnake.com/api>
