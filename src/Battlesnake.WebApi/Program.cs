@@ -17,7 +17,7 @@ app.MapGet("/", () =>
     {
         ApiVersion = "1",
         Author = "deadlydog-DanSchroeder",
-        Color = "#4C89C8",
+        Color = "#0b7d1cff",
         Head = "do-sammy",
         Tail = "nr-booster"
 	};
