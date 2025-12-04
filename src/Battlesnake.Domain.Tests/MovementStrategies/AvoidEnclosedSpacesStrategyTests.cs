@@ -57,7 +57,7 @@ public class AvoidEnclosedSpacesStrategyTests
 	}
 
 	[Fact]
-	public void WhenMovingToCellWithOneEnclosedSurroundingSnakeCell_ThenSlightlyEnclosedPenaltyIsApplied()
+	public void WhenMovingToCellWithOneEnclosedSurroundingSnakeCell_Then1DirectionsBlockedPenaltyIsApplied()
 	{
 		// Arrange
 		var board = new Board(11, 11);
@@ -79,13 +79,13 @@ public class AvoidEnclosedSpacesStrategyTests
 
 		// Assert
 		directionScores.Up.ShouldBe(0); 
-		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidSlightlyEnclosedSpaceScorePenalty); // Small penalty for one enclosed surrounding cell
+		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace1DirectionBlockedScorePenalty); // Small penalty for one enclosed surrounding cell
 		directionScores.Left.ShouldBe(0);
 		directionScores.Right.ShouldBe(0);
 	}
 
 	[Fact]
-	public void WhenMovingToCellWithTwoEnclosedSurroundingSnakeCells_ThenMostlyEnclosedPenaltyIsApplied()
+	public void WhenMovingToCellWithTwoEnclosedSurroundingSnakeCells_Then2DirectionsBlockedPenaltyIsApplied()
 	{
 		// Arrange
 		var board = new Board(11, 11);
@@ -109,13 +109,13 @@ public class AvoidEnclosedSpacesStrategyTests
 		// Assert
 
 		directionScores.Up.ShouldBe(0);
-		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidMostlyEnclosedSpaceScorePenalty); // Penalty for two enclosed surrounding cells (plus player's body)
+		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace2DirectionsBlockedScorePenalty); // Penalty for two enclosed surrounding cells (plus player's body)
 		directionScores.Left.ShouldBe(0);
-		directionScores.Right.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidSlightlyEnclosedSpaceScorePenalty);
+		directionScores.Right.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace1DirectionBlockedScorePenalty);
 	}
 
 	[Fact]
-	public void WhenMovingToCellWithThreeEnclosedSurroundingSnakeCells_ThenCompletelyEnclosedPenaltyIsApplied()
+	public void WhenMovingToCellWithThreeEnclosedSurroundingSnakeCells_ThenAll3DirectionsBlockedPenaltyIsApplied()
 	{
 		// Arrange
 		var board = new Board(11, 11);
@@ -140,13 +140,13 @@ public class AvoidEnclosedSpacesStrategyTests
 
 		// Assert
 		directionScores.Up.ShouldBe(0);
-		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidCompletelyEnclosedSpaceScorePenalty); // Penalty for three enclosed surrounding cells
-		directionScores.Left.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidSlightlyEnclosedSpaceScorePenalty);
-		directionScores.Right.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidSlightlyEnclosedSpaceScorePenalty);
+		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpaceAll3DirectionsBlockedScorePenalty); // Penalty for three enclosed surrounding cells
+		directionScores.Left.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace1DirectionBlockedScorePenalty);
+		directionScores.Right.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace1DirectionBlockedScorePenalty);
 	}
 
 	[Fact]
-	public void WhenMovingToLeftWallCellWithTwoOpenSides_ThenSlightlyEnclosedPenaltyIsApplied()
+	public void WhenMovingToLeftWallCellWithTwoOpenSides_Then1DirectionsBlockedPenaltyIsApplied()
 	{
 		// Arrange
 		var board = new Board(11, 11);
@@ -163,7 +163,7 @@ public class AvoidEnclosedSpacesStrategyTests
 		// Assert
 		directionScores.Up.ShouldBe(0); 
 		directionScores.Down.ShouldBe(0);
-		directionScores.Left.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidSlightlyEnclosedSpaceScorePenalty);
+		directionScores.Left.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace1DirectionBlockedScorePenalty);
 		directionScores.Right.ShouldBe(0);
 	}
 
@@ -183,14 +183,14 @@ public class AvoidEnclosedSpacesStrategyTests
 		var directionScores = AvoidEnclosedSpacesStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Up.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidSlightlyEnclosedSpaceScorePenalty); // Small penalty for 2 enclosed surrounding cells
+		directionScores.Up.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace1DirectionBlockedScorePenalty); // Small penalty for 2 enclosed surrounding cells
 		directionScores.Down.ShouldBe(0);
 		directionScores.Left.ShouldBe(0);
 		directionScores.Right.ShouldBe(0);
 	}
 
 	[Fact]
-	public void WhenMovingToRightWallCellWithTwoOpenSides_ThenSlightlyEnclosedPenaltyIsApplied()
+	public void WhenMovingToRightWallCellWithTwoOpenSides_Then1DirectionsBlockedPenaltyIsApplied()
 	{
 		// Arrange
 		var board = new Board(11, 11);
@@ -208,11 +208,11 @@ public class AvoidEnclosedSpacesStrategyTests
 		directionScores.Up.ShouldBe(0); 
 		directionScores.Down.ShouldBe(0);
 		directionScores.Left.ShouldBe(0);
-		directionScores.Right.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidSlightlyEnclosedSpaceScorePenalty);
+		directionScores.Right.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace1DirectionBlockedScorePenalty);
 	}
 
 	[Fact]
-	public void WhenMovingToBottomWallCellWithTwoOpenSides_ThenSlightlyEnclosedPenaltyIsApplied()
+	public void WhenMovingToBottomWallCellWithTwoOpenSides_Then1DirectionsBlockedPenaltyIsApplied()
 	{
 		// Arrange
 		var board = new Board(11, 11);
@@ -228,13 +228,13 @@ public class AvoidEnclosedSpacesStrategyTests
 
 		// Assert
 		directionScores.Up.ShouldBe(0); 
-		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidSlightlyEnclosedSpaceScorePenalty); // Small penalty for 2 enclosed surrounding cells
+		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace1DirectionBlockedScorePenalty); // Small penalty for 2 enclosed surrounding cells
 		directionScores.Left.ShouldBe(0);
 		directionScores.Right.ShouldBe(0);
 	}
 
 	[Fact]
-	public void WhenMovingToTopLeftCornerCell_ThenMostlyEnclosedPenaltyIsApplied()
+	public void WhenMovingToTopLeftCornerCell_Then2DirectionsBlockedPenaltyIsApplied()
 	{
 		// Arrange
 		var board = new Board(11, 11);
@@ -247,14 +247,14 @@ public class AvoidEnclosedSpacesStrategyTests
 		// Act
 		var directionScores = AvoidEnclosedSpacesStrategy.CalculateDirectionScores(board);
 		// Assert
-		directionScores.Up.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidMostlyEnclosedSpaceScorePenalty); 
+		directionScores.Up.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace2DirectionsBlockedScorePenalty); 
 		directionScores.Down.ShouldBe(0);
 		directionScores.Left.ShouldBe(0); 
 		directionScores.Right.ShouldBe(0);
 	}
 
 	[Fact]
-	public void WhenMovingToTopRightCornerCell_ThenMostlyEnclosedPenaltyIsApplied()
+	public void WhenMovingToTopRightCornerCell_Then2DirectionsBlockedPenaltyIsApplied()
 	{
 		// Arrange
 		var board = new Board(11, 11);
@@ -269,14 +269,14 @@ public class AvoidEnclosedSpacesStrategyTests
 		var directionScores = AvoidEnclosedSpacesStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Up.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidMostlyEnclosedSpaceScorePenalty);
+		directionScores.Up.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace2DirectionsBlockedScorePenalty);
 		directionScores.Down.ShouldBe(0);
 		directionScores.Left.ShouldBe(0); 
 		directionScores.Right.ShouldBe(0);
 	}
 
 	[Fact]
-	public void WhenMovingToBottomLeftCornerCell_ThenMostlyEnclosedPenaltyIsApplied()
+	public void WhenMovingToBottomLeftCornerCell_Then2DirectionsBlockedPenaltyIsApplied()
 	{
 		// Arrange
 		var board = new Board(11, 11);
@@ -292,13 +292,13 @@ public class AvoidEnclosedSpacesStrategyTests
 
 		// Assert
 		directionScores.Up.ShouldBe(0);
-		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidMostlyEnclosedSpaceScorePenalty);
+		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace2DirectionsBlockedScorePenalty);
 		directionScores.Left.ShouldBe(0); 
 		directionScores.Right.ShouldBe(0);
 	}
 
 	[Fact]
-	public void WhenMovingToBottomRightCornerCell_ThenMostlyEnclosedPenaltyIsApplied()
+	public void WhenMovingToBottomRightCornerCell_Then2DirectionsBlockedPenaltyIsApplied()
 	{
 		// Arrange
 		var board = new Board(11, 11);
@@ -314,13 +314,13 @@ public class AvoidEnclosedSpacesStrategyTests
 
 		// Assert
 		directionScores.Up.ShouldBe(0);
-		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidMostlyEnclosedSpaceScorePenalty);
+		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace2DirectionsBlockedScorePenalty);
 		directionScores.Left.ShouldBe(0); 
 		directionScores.Right.ShouldBe(0);
 	}
 
 	[Fact]
-	public void WhenMovingToRightWallCellWithThreeEnclosedSides_ThenCompletelyEnclosedPenaltyIsApplied()
+	public void WhenMovingToRightWallCellWithThreeEnclosedSides_ThenAll3DirectionsBlockedPenaltyIsApplied()
 	{
 		// Arrange
 		var board = new Board(11, 11);
@@ -347,14 +347,14 @@ public class AvoidEnclosedSpacesStrategyTests
 		var directionScores = AvoidEnclosedSpacesStrategy.CalculateDirectionScores(board);
 
 		// Assert
-		directionScores.Up.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidSlightlyEnclosedSpaceScorePenalty); 
-		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidSlightlyEnclosedSpaceScorePenalty);
+		directionScores.Up.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace1DirectionBlockedScorePenalty); 
+		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace1DirectionBlockedScorePenalty);
 		directionScores.Left.ShouldBe(0);
-		directionScores.Right.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidCompletelyEnclosedSpaceScorePenalty); // Penalty for three enclosed surrounding cells
+		directionScores.Right.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpaceAll3DirectionsBlockedScorePenalty); // Penalty for three enclosed surrounding cells
 	}
 
 	[Fact]
-	public void WhenMovingToRightWallWithTwoEnclosedSidesAndASnakeTail_ThenMostlyEnclosedPenaltyIsApplied()
+	public void WhenMovingToRightWallWithTwoEnclosedSidesAndASnakeTail_Then2DirectionsBlockedPenaltyIsApplied()
 	{
 
 		// Arrange
@@ -383,8 +383,8 @@ public class AvoidEnclosedSpacesStrategyTests
 
 		// Assert
 		directionScores.Up.ShouldBe(0);
-		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidSlightlyEnclosedSpaceScorePenalty);
+		directionScores.Down.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace1DirectionBlockedScorePenalty);
 		directionScores.Left.ShouldBe(0);
-		directionScores.Right.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidMostlyEnclosedSpaceScorePenalty); // Penalty for two enclosed surrounding cells (plus player's body)
+		directionScores.Right.ShouldBe(AvoidEnclosedSpacesStrategy.AvoidEnclosedSpace2DirectionsBlockedScorePenalty); // Penalty for two enclosed surrounding cells (plus player's body)
 	}
 }

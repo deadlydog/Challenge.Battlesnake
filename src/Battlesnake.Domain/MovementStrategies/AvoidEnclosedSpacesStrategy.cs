@@ -5,9 +5,9 @@ namespace Battlesnake.Domain.MovementStrategies;
 
 public class AvoidEnclosedSpacesStrategy : IMovementStrategy
 {
-	public const int AvoidCompletelyEnclosedSpaceScorePenalty = -5000; // Almost guaranteed death on next turn, so high penalty.
-	public const int AvoidMostlyEnclosedSpaceScorePenalty = -1200; // Penalty to avoid potentially getting trapped, but less than hitting a wall or snake body as you could live longer.
-	public const int AvoidSlightlyEnclosedSpaceScorePenalty = -200; // Small penalty to avoid wide open spaces.
+	public const int AvoidEnclosedSpaceAll3DirectionsBlockedScorePenalty = -5000; // Almost guaranteed death on next turn, so high penalty.
+	public const int AvoidEnclosedSpace2DirectionsBlockedScorePenalty = -1200; // Penalty to avoid potentially getting trapped, but less than hitting a wall or snake body as you could live longer.
+	public const int AvoidEnclosedSpace1DirectionBlockedScorePenalty = -200; // Small penalty to prefer wide open spaces.
 
 	public static DirectionScores CalculateDirectionScores(Board board)
 	{
@@ -67,17 +67,17 @@ public class AvoidEnclosedSpacesStrategy : IMovementStrategy
 			if (numberOfEnclosedSurroundingCells == 4)
 			{
 				// This move would result in being completely enclosed and death, so apply penalty.
-				directionScores.AddScore(potentialMoveCell.Direction, AvoidCompletelyEnclosedSpaceScorePenalty);
+				directionScores.AddScore(potentialMoveCell.Direction, AvoidEnclosedSpaceAll3DirectionsBlockedScorePenalty);
 			}
 			else if (numberOfEnclosedSurroundingCells == 3)
 			{
 				// This move would result in being mostly enclosed, which could lead to getting trapped, so apply a lesser penalty.
-				directionScores.AddScore(potentialMoveCell.Direction, AvoidMostlyEnclosedSpaceScorePenalty);
+				directionScores.AddScore(potentialMoveCell.Direction, AvoidEnclosedSpace2DirectionsBlockedScorePenalty);
 			}
 			else if (numberOfEnclosedSurroundingCells == 2)
 			{
 				// This move would result in being slightly enclosed, which may lead to getting trapped, so apply a small penalty.
-				directionScores.AddScore(potentialMoveCell.Direction, AvoidSlightlyEnclosedSpaceScorePenalty);
+				directionScores.AddScore(potentialMoveCell.Direction, AvoidEnclosedSpace1DirectionBlockedScorePenalty);
 			}
 		}
 
